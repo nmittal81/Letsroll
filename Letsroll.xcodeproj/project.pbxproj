@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		475BBD125FDA1BA5EC4D2355 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B666649C08DEC184FBED99B /* libPods.a */; };
 		7C1B1C511B972F950037EE69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B1C501B972F950037EE69 /* main.m */; };
 		7C1B1C541B972F950037EE69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B1C531B972F950037EE69 /* AppDelegate.m */; };
 		7C1B1C571B972F950037EE69 /* Letsroll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B1C551B972F950037EE69 /* Letsroll.xcdatamodeld */; };
@@ -15,6 +16,10 @@
 		7C1B1C5F1B972F950037EE69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C1B1C5E1B972F950037EE69 /* Images.xcassets */; };
 		7C1B1C621B972F950037EE69 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1B1C601B972F950037EE69 /* LaunchScreen.xib */; };
 		7C1B1C6E1B972F950037EE69 /* LetsrollTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B1C6D1B972F950037EE69 /* LetsrollTests.m */; };
+		7CA7CBA91B98CC77001BD0B6 /* SavedTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAB1B98D1F3001BD0B6 /* PackingListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		7CA7CBAE1B98D5EE001BD0B6 /* Trips.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAD1B98D5EE001BD0B6 /* Trips.storyboard */; settings = {ASSET_TAGS = (); }; };
+		7CF16B751B977CAA007D58C2 /* Packing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CF16B741B977CAA007D58C2 /* Packing.storyboard */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06BB0534B280B586EF4EBB1B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		1E1533BC8226AA366C85003D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3B666649C08DEC184FBED99B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1B1C4B1B972F950037EE69 /* Letsroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Letsroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1B1C4F1B972F950037EE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C1B1C501B972F950037EE69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -42,6 +50,12 @@
 		7C1B1C671B972F950037EE69 /* LetsrollTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LetsrollTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1B1C6C1B972F950037EE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C1B1C6D1B972F950037EE69 /* LetsrollTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LetsrollTests.m; sourceTree = "<group>"; };
+		7CA7CBA71B98CC77001BD0B6 /* SavedTripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedTripsTableViewController.h; sourceTree = "<group>"; };
+		7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedTripsTableViewController.m; sourceTree = "<group>"; };
+		7CA7CBAA1B98D1F3001BD0B6 /* PackingListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackingListTableViewController.h; sourceTree = "<group>"; };
+		7CA7CBAB1B98D1F3001BD0B6 /* PackingListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackingListTableViewController.m; sourceTree = "<group>"; };
+		7CA7CBAD1B98D5EE001BD0B6 /* Trips.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Trips.storyboard; sourceTree = "<group>"; };
+		7CF16B741B977CAA007D58C2 /* Packing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Packing.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				475BBD125FDA1BA5EC4D2355 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,12 +77,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1DA55EF1A3BF6C87AA5AE5FE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B666649C08DEC184FBED99B /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7C1B1C421B972F950037EE69 = {
 			isa = PBXGroup;
 			children = (
 				7C1B1C4D1B972F950037EE69 /* Letsroll */,
 				7C1B1C6A1B972F950037EE69 /* LetsrollTests */,
-				7C1B1C4C1B972F950037EE69 /* Products */,
+				AF52CA5E937A164281FA0DF7 /* Pods */,
+				1DA55EF1A3BF6C87AA5AE5FE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +102,7 @@
 				7C1B1C671B972F950037EE69 /* LetsrollTests.xctest */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		7C1B1C4D1B972F950037EE69 /* Letsroll */ = {
@@ -92,6 +117,12 @@
 				7C1B1C601B972F950037EE69 /* LaunchScreen.xib */,
 				7C1B1C551B972F950037EE69 /* Letsroll.xcdatamodeld */,
 				7C1B1C4E1B972F950037EE69 /* Supporting Files */,
+				7CF16B741B977CAA007D58C2 /* Packing.storyboard */,
+				7CA7CBA71B98CC77001BD0B6 /* SavedTripsTableViewController.h */,
+				7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */,
+				7CA7CBAA1B98D1F3001BD0B6 /* PackingListTableViewController.h */,
+				7CA7CBAB1B98D1F3001BD0B6 /* PackingListTableViewController.m */,
+				7CA7CBAD1B98D5EE001BD0B6 /* Trips.storyboard */,
 			);
 			path = Letsroll;
 			sourceTree = "<group>";
@@ -99,6 +130,7 @@
 		7C1B1C4E1B972F950037EE69 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7C1B1C4C1B972F950037EE69 /* Products */,
 				7C1B1C4F1B972F950037EE69 /* Info.plist */,
 				7C1B1C501B972F950037EE69 /* main.m */,
 			);
@@ -122,6 +154,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AF52CA5E937A164281FA0DF7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				06BB0534B280B586EF4EBB1B /* Pods.debug.xcconfig */,
+				1E1533BC8226AA366C85003D /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -129,9 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C1B1C711B972F950037EE69 /* Build configuration list for PBXNativeTarget "Letsroll" */;
 			buildPhases = (
+				C19D0363B067CAF4A9FE9B52 /* Check Pods Manifest.lock */,
 				7C1B1C471B972F950037EE69 /* Sources */,
 				7C1B1C481B972F950037EE69 /* Frameworks */,
 				7C1B1C491B972F950037EE69 /* Resources */,
+				59D4771A476A51DEA29F1850 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -166,7 +209,7 @@
 		7C1B1C431B972F950037EE69 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Neha Mittal";
 				TargetAttributes = {
 					7C1B1C4A1B972F950037EE69 = {
@@ -204,6 +247,8 @@
 			files = (
 				7C1B1C5D1B972F950037EE69 /* Main.storyboard in Resources */,
 				7C1B1C621B972F950037EE69 /* LaunchScreen.xib in Resources */,
+				7CA7CBAE1B98D5EE001BD0B6 /* Trips.storyboard in Resources */,
+				7CF16B751B977CAA007D58C2 /* Packing.storyboard in Resources */,
 				7C1B1C5F1B972F950037EE69 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,6 +262,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		59D4771A476A51DEA29F1850 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C19D0363B067CAF4A9FE9B52 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7C1B1C471B972F950037EE69 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -226,6 +304,8 @@
 				7C1B1C571B972F950037EE69 /* Letsroll.xcdatamodeld in Sources */,
 				7C1B1C5A1B972F950037EE69 /* ViewController.m in Sources */,
 				7C1B1C511B972F950037EE69 /* main.m in Sources */,
+				7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */,
+				7CA7CBA91B98CC77001BD0B6 /* SavedTripsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +368,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -303,7 +384,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -341,7 +422,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -351,20 +432,24 @@
 		};
 		7C1B1C721B972F950037EE69 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06BB0534B280B586EF4EBB1B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Letsroll/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Letsroll.Letsroll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		7C1B1C731B972F950037EE69 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E1533BC8226AA366C85003D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Letsroll/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Letsroll.Letsroll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -383,6 +468,7 @@
 				);
 				INFOPLIST_FILE = LetsrollTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Letsroll.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Letsroll.app/Letsroll";
 			};
@@ -398,6 +484,7 @@
 				);
 				INFOPLIST_FILE = LetsrollTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Letsroll.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Letsroll.app/Letsroll";
 			};
@@ -422,6 +509,7 @@
 				7C1B1C731B972F950037EE69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7C1B1C741B972F950037EE69 /* Build configuration list for PBXNativeTarget "LetsrollTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +518,7 @@
 				7C1B1C761B972F950037EE69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
