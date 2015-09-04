@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *dateTextField;
 @property (strong, nonatomic) ActionSheetDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UISwitch *familySwitch;
+@property (weak, nonatomic) UITextField *nameTextField;
+
 - (IBAction)familySwitchChanged:(id)sender;
 - (IBAction)submitTravelInfo:(id)sender;
 
@@ -28,19 +30,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (YES) {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *userName = [userDefaults objectForKey:@"userName"];
+    if (userName == nil || [userName isEqualToString:@""]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Let's get started" message:@"Please enter your name" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction
                                    actionWithTitle:NSLocalizedString(@"OK", @"OK action")
                                    style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction *action)
                                    {
-                                       //Core data work
-                                       NSLog(@"OK action");
+                                       [userDefaults setObject:self.nameTextField.text forKey:@"userName"];
+                                       [userDefaults synchronize];
                                    }];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
          {
              textField.placeholder = NSLocalizedString(@"LoginPlaceholder", @"Login");
+             self.nameTextField = textField;
          }];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
