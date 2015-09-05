@@ -23,6 +23,7 @@
 - (IBAction)addNewItem:(id)sender {
     if ([self.delegate respondsToSelector:@selector(newItemAddedToPack:)]) {
         [self.delegate newItemAddedToPack:self.itemTextField.text];
+        self.itemTextField.text = @"";
     }
 }
 @end

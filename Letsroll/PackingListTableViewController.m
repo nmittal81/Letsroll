@@ -61,7 +61,14 @@
         PackingItemTableViewCell *packingCell = [tableView dequeueReusableCellWithIdentifier:@"PackingCell" forIndexPath:indexPath];
         NSManagedObject *matches = [self.packingListArray objectAtIndex:indexPath.row];
         packingCell.itemName.text = [matches valueForKey:@"name"];
+        BOOL isPacked = [[matches valueForKey:@"isPacked"] boolValue];
+        if (isPacked) {
+            [packingCell.itemPackedButton setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateNormal];
+        } else {
+            [packingCell.itemPackedButton setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
+        }
         packingCell.delegate = self;
+        packingCell.index = indexPath.row;
         return packingCell;
     } else {
         NewPackingItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewItem" forIndexPath:indexPath];
@@ -85,7 +92,19 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //Do some thing here
+        AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = appdelegate.managedObjectContext;
+        NSManagedObject *obj = [self.packingListArray objectAtIndex:indexPath.row];
+        [context deleteObject:obj];
+        NSError *error;
+        [context save:&error];
+        if (error == nil) {
+            [self.packingListArray removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView reloadData];
+        }
+
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
@@ -131,6 +150,11 @@
     
     NSError *error;
     [context save:&error];
+    if (error != nil) {
+        UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Unable to save item" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:errorAlert animated:YES completion:nil];
+        return;
+    }
     [self.packingListArray addObject:packingItem]; //repository is a NSMutableArray
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.packingListArray indexOfObject:packingItem] inSection:0];
     [self.tableView beginUpdates];
@@ -141,7 +165,17 @@
 
 #pragma mark PackingItemTableViewCellDelegate
 -(void) itemPackChangeStatus:(NSUInteger)index {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObject *matches = [self.packingListArray objectAtIndex:index];
+    BOOL isPacked = [[matches valueForKey:@"isPacked"] boolValue];
+    
+    NSManagedObject *packingItem = [self.packingListArray objectAtIndex:index];
+    [packingItem setValue:[NSNumber numberWithBool:!isPacked] forKey:@"isPacked"];
+    NSError *error;
+    [context save:&error];
+    [self.tableView reloadData];
 }
 
 @end

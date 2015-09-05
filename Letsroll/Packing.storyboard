@@ -22,13 +22,19 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11o-gW-7cE">
-                                            <rect key="frame" x="22" y="11" width="151" height="21"/>
+                                            <rect key="frame" x="22" y="10" width="151" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="151" id="mtE-qs-R06"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjp-bg-GYS">
-                                            <rect key="frame" x="350" y="11" width="62" height="22"/>
+                                            <rect key="frame" x="350" y="10" width="19" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="19" id="Nex-OJ-5a9"/>
+                                            </constraints>
                                             <state key="normal" title="Button" image="unchecked"/>
                                             <connections>
                                                 <action selector="itemPacked:" destination="Pey-TV-LeG" eventType="touchUpInside" id="IYR-O5-8eR"/>
@@ -37,11 +43,12 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="rjp-bg-GYS" firstAttribute="top" secondItem="Qer-Od-cmk" secondAttribute="topMargin" constant="10" id="5Ox-wY-lTM"/>
-                                        <constraint firstItem="11o-gW-7cE" firstAttribute="leading" secondItem="Qer-Od-cmk" secondAttribute="leadingMargin" constant="14" id="GFu-P0-ONE"/>
+                                        <constraint firstItem="11o-gW-7cE" firstAttribute="centerY" secondItem="Qer-Od-cmk" secondAttribute="centerY" id="GPJ-ag-62v"/>
+                                        <constraint firstItem="11o-gW-7cE" firstAttribute="leading" secondItem="Qer-Od-cmk" secondAttribute="leadingMargin" constant="20" id="Hg7-Q1-d5I"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="rjp-bg-GYS" secondAttribute="trailing" constant="188" id="JU3-j7-nFh"/>
-                                        <constraint firstItem="rjp-bg-GYS" firstAttribute="leading" secondItem="11o-gW-7cE" secondAttribute="trailing" constant="185" id="Y1B-ts-7Ky"/>
+                                        <constraint firstItem="11o-gW-7cE" firstAttribute="top" secondItem="rjp-bg-GYS" secondAttribute="top" id="VLL-uD-hmH"/>
+                                        <constraint firstAttribute="trailing" secondItem="rjp-bg-GYS" secondAttribute="trailing" constant="20" id="ael-ch-r22"/>
                                         <constraint firstItem="rjp-bg-GYS" firstAttribute="leading" secondItem="11o-gW-7cE" secondAttribute="trailing" constant="185" id="eld-yR-bKf"/>
-                                        <constraint firstItem="11o-gW-7cE" firstAttribute="top" secondItem="Qer-Od-cmk" secondAttribute="topMargin" constant="10" id="t6e-5d-Vqh"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -62,22 +69,34 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g08-r8-E6S">
-                                            <rect key="frame" x="25" y="7" width="97" height="30"/>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g08-r8-E6S">
+                                            <rect key="frame" x="28" y="7" width="97" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="97" id="JXU-xc-GHR"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="830-pL-GLU">
-                                            <rect key="frame" x="320" y="7" width="46" height="30"/>
-                                            <state key="normal" title="Button"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="830-pL-GLU">
+                                            <rect key="frame" x="510" y="7" width="62" height="30"/>
+                                            <state key="normal" title="Add Item"/>
                                             <connections>
                                                 <action selector="addNewItem:" destination="mVe-q4-a5y" eventType="touchUpInside" id="US3-s2-9NI"/>
                                             </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="830-pL-GLU" firstAttribute="leading" secondItem="g08-r8-E6S" secondAttribute="trailing" constant="198" id="OSr-mi-Eip"/>
+                                        <constraint firstItem="g08-r8-E6S" firstAttribute="centerY" secondItem="PHk-6X-xZp" secondAttribute="centerY" id="7hl-3z-WLR"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="830-pL-GLU" secondAttribute="trailing" constant="20" id="XWH-0M-Y7v"/>
+                                        <constraint firstItem="g08-r8-E6S" firstAttribute="leading" secondItem="PHk-6X-xZp" secondAttribute="leadingMargin" constant="20" id="dCd-Pu-9oG"/>
+                                        <constraint firstAttribute="trailing" secondItem="830-pL-GLU" secondAttribute="trailing" constant="226" id="qcc-EN-Wl3"/>
+                                        <constraint firstItem="830-pL-GLU" firstAttribute="top" secondItem="g08-r8-E6S" secondAttribute="top" id="wJU-WS-ep1"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="qcc-EN-Wl3"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="itemTextField" destination="g08-r8-E6S" id="saU-Pp-GHl"/>
