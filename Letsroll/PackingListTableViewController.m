@@ -7,8 +7,12 @@
 //
 
 #import "PackingListTableViewController.h"
+#import "AppDelegate.h"
+#import "PackingItemTableViewCell.h"
+#import "NewPackingItemTableViewCell.h"
 
-@interface PackingListTableViewController ()
+@interface PackingListTableViewController () <NewPackingItemTableViewCellDelegate, PackingItemTableViewCellDelegate>
+@property (nonatomic, retain) NSMutableArray *packingListArray;
 
 @end
 
@@ -20,8 +24,20 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"PackingList"];
+    
+    NSError *error = nil;
+    
+    NSArray *results = [context executeFetchRequest:request error:&error];
+    self.packingListArray = [results mutableCopy];
+    
+//    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+//    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItemsToPackingList:)];
+//    NSArray *actionButtonItems = @[shareItem];
+//    self.navigationItem.rightBarButtonItems = actionButtonItems;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,34 +48,39 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return [self.packingListArray count]+1;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    if (indexPath.row < [self.packingListArray count]) {
+        PackingItemTableViewCell *packingCell = [tableView dequeueReusableCellWithIdentifier:@"PackingCell" forIndexPath:indexPath];
+        NSManagedObject *matches = [self.packingListArray objectAtIndex:indexPath.row];
+        packingCell.itemName.text = [matches valueForKey:@"name"];
+        packingCell.delegate = self;
+        return packingCell;
+    } else {
+        NewPackingItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewItem" forIndexPath:indexPath];
+        cell.delegate = self;
     
-    // Configure the cell...
-    
-    return cell;
+        return cell;
+    }
 }
-*/
 
-/*
+
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -69,7 +90,7 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
@@ -94,5 +115,33 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark NewPackingItemTableViewCellDelegate methods
+-(void)newItemAddedToPack:(NSString*)name {
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObject *packingItem;
+    packingItem = [NSEntityDescription
+                  insertNewObjectForEntityForName:@"PackingList"
+                  inManagedObjectContext:context];
+    [packingItem setValue: name forKey:@"name"];
+    [packingItem setValue: [NSNumber numberWithBool:NO] forKey:@"isPacked"];
+    
+    NSError *error;
+    [context save:&error];
+    [self.packingListArray addObject:packingItem]; //repository is a NSMutableArray
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.packingListArray indexOfObject:packingItem] inSection:0];
+    [self.tableView beginUpdates];
+    [self.tableView
+     insertRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView endUpdates];
+}
+
+#pragma mark PackingItemTableViewCellDelegate
+-(void) itemPackChangeStatus:(NSUInteger)index {
+    
+}
 
 @end

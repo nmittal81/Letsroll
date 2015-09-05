@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="SdK-Iv-ydf">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Packing List Table View Controller-->
@@ -13,13 +14,74 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Pey-TV-LeG">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PackingCell" id="Pey-TV-LeG" customClass="PackingItemTableViewCell">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pey-TV-LeG" id="Qer-Od-cmk">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11o-gW-7cE">
+                                            <rect key="frame" x="22" y="11" width="151" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjp-bg-GYS">
+                                            <rect key="frame" x="350" y="11" width="62" height="22"/>
+                                            <state key="normal" title="Button" image="unchecked"/>
+                                            <connections>
+                                                <action selector="itemPacked:" destination="Pey-TV-LeG" eventType="touchUpInside" id="IYR-O5-8eR"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="rjp-bg-GYS" firstAttribute="top" secondItem="Qer-Od-cmk" secondAttribute="topMargin" constant="10" id="5Ox-wY-lTM"/>
+                                        <constraint firstItem="11o-gW-7cE" firstAttribute="leading" secondItem="Qer-Od-cmk" secondAttribute="leadingMargin" constant="14" id="GFu-P0-ONE"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="rjp-bg-GYS" secondAttribute="trailing" constant="188" id="JU3-j7-nFh"/>
+                                        <constraint firstItem="rjp-bg-GYS" firstAttribute="leading" secondItem="11o-gW-7cE" secondAttribute="trailing" constant="185" id="Y1B-ts-7Ky"/>
+                                        <constraint firstItem="rjp-bg-GYS" firstAttribute="leading" secondItem="11o-gW-7cE" secondAttribute="trailing" constant="185" id="eld-yR-bKf"/>
+                                        <constraint firstItem="11o-gW-7cE" firstAttribute="top" secondItem="Qer-Od-cmk" secondAttribute="topMargin" constant="10" id="t6e-5d-Vqh"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="JU3-j7-nFh"/>
+                                            <exclude reference="eld-yR-bKf"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="itemName" destination="11o-gW-7cE" id="Nrl-Ja-DUr"/>
+                                    <outlet property="itemPackedButton" destination="rjp-bg-GYS" id="9En-Fn-e1q"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewItem" id="mVe-q4-a5y" customClass="NewPackingItemTableViewCell">
+                                <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mVe-q4-a5y" id="PHk-6X-xZp">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g08-r8-E6S">
+                                            <rect key="frame" x="25" y="7" width="97" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="830-pL-GLU">
+                                            <rect key="frame" x="320" y="7" width="46" height="30"/>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="addNewItem:" destination="mVe-q4-a5y" eventType="touchUpInside" id="US3-s2-9NI"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="830-pL-GLU" firstAttribute="leading" secondItem="g08-r8-E6S" secondAttribute="trailing" constant="198" id="OSr-mi-Eip"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="itemTextField" destination="g08-r8-E6S" id="saU-Pp-GHl"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -33,4 +95,7 @@
             <point key="canvasLocation" x="107" y="129"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="unchecked" width="8" height="8"/>
+    </resources>
 </document>

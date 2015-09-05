@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="14F27" minimumToolsVersion="Automatic">
     <entity name="PackingList" syncable="YES">
+        <attribute name="isPacked" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" syncable="YES"/>
     </entity>
@@ -11,7 +12,7 @@
         <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PackingList" syncable="YES"/>
     </entity>
     <elements>
+        <element name="PackingList" positionX="-513" positionY="-0" width="128" height="90"/>
         <element name="TravelInfo" positionX="-209" positionY="-36" width="128" height="103"/>
-        <element name="PackingList" positionX="-513" positionY="-0" width="128" height="73"/>
     </elements>
 </model>
