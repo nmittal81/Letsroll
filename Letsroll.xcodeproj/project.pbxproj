@@ -22,6 +22,10 @@
 		7CA7CBB31B9B43BA001BD0B6 /* PackingItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBB21B9B43BA001BD0B6 /* PackingItemTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBB61B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBB51B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBB91B9DB23F001BD0B6 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBB81B9DB23F001BD0B6 /* Utility.m */; settings = {ASSET_TAGS = (); }; };
+		7CA7CBCE1B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBC71B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		7CA7CBCF1B9DCB57001BD0B6 /* PackingList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBC91B9DCB57001BD0B6 /* PackingList.m */; settings = {ASSET_TAGS = (); }; };
+		7CA7CBD01B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBCB1B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		7CA7CBD11B9DCB57001BD0B6 /* TravelInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBCD1B9DCB57001BD0B6 /* TravelInfo.m */; settings = {ASSET_TAGS = (); }; };
 		7CF16B751B977CAA007D58C2 /* Packing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CF16B741B977CAA007D58C2 /* Packing.storyboard */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -64,6 +68,14 @@
 		7CA7CBB51B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPackingItemTableViewCell.m; sourceTree = "<group>"; };
 		7CA7CBB71B9DB23F001BD0B6 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		7CA7CBB81B9DB23F001BD0B6 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		7CA7CBC61B9DCB57001BD0B6 /* PackingList+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PackingList+CoreDataProperties.h"; sourceTree = "<group>"; };
+		7CA7CBC71B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PackingList+CoreDataProperties.m"; sourceTree = "<group>"; };
+		7CA7CBC81B9DCB57001BD0B6 /* PackingList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackingList.h; sourceTree = "<group>"; };
+		7CA7CBC91B9DCB57001BD0B6 /* PackingList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackingList.m; sourceTree = "<group>"; };
+		7CA7CBCA1B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TravelInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		7CA7CBCB1B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TravelInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		7CA7CBCC1B9DCB57001BD0B6 /* TravelInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelInfo.h; sourceTree = "<group>"; };
+		7CA7CBCD1B9DCB57001BD0B6 /* TravelInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelInfo.m; sourceTree = "<group>"; };
 		7CF16B741B977CAA007D58C2 /* Packing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Packing.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +138,14 @@
 				7C1B1C5E1B972F950037EE69 /* Images.xcassets */,
 				7C1B1C601B972F950037EE69 /* LaunchScreen.xib */,
 				7C1B1C551B972F950037EE69 /* Letsroll.xcdatamodeld */,
+				7CA7CBC61B9DCB57001BD0B6 /* PackingList+CoreDataProperties.h */,
+				7CA7CBC71B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m */,
+				7CA7CBC81B9DCB57001BD0B6 /* PackingList.h */,
+				7CA7CBC91B9DCB57001BD0B6 /* PackingList.m */,
+				7CA7CBCA1B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.h */,
+				7CA7CBCB1B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m */,
+				7CA7CBCC1B9DCB57001BD0B6 /* TravelInfo.h */,
+				7CA7CBCD1B9DCB57001BD0B6 /* TravelInfo.m */,
 				7C1B1C4E1B972F950037EE69 /* Supporting Files */,
 				7CA7CBA71B98CC77001BD0B6 /* SavedTripsTableViewController.h */,
 				7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */,
@@ -323,14 +343,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CA7CBCF1B9DCB57001BD0B6 /* PackingList.m in Sources */,
+				7CA7CBD11B9DCB57001BD0B6 /* TravelInfo.m in Sources */,
 				7C1B1C541B972F950037EE69 /* AppDelegate.m in Sources */,
 				7CA7CBB61B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m in Sources */,
+				7CA7CBD01B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m in Sources */,
 				7C1B1C571B972F950037EE69 /* Letsroll.xcdatamodeld in Sources */,
 				7C1B1C5A1B972F950037EE69 /* ViewController.m in Sources */,
 				7CA7CBB91B9DB23F001BD0B6 /* Utility.m in Sources */,
 				7C1B1C511B972F950037EE69 /* main.m in Sources */,
 				7CA7CBB31B9B43BA001BD0B6 /* PackingItemTableViewCell.m in Sources */,
 				7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */,
+				7CA7CBCE1B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m in Sources */,
 				7CA7CBA91B98CC77001BD0B6 /* SavedTripsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

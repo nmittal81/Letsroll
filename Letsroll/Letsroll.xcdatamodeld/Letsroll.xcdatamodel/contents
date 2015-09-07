@@ -3,17 +3,16 @@
     <entity name="PackingList" representedClassName="PackingList" syncable="YES">
         <attribute name="isPacked" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="travelId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" inverseName="relationship" inverseEntity="TravelInfo" syncable="YES"/>
+        <relationship name="travelInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" inverseName="packingList" inverseEntity="TravelInfo" syncable="YES"/>
     </entity>
     <entity name="TravelInfo" representedClassName="TravelInfo" syncable="YES">
         <attribute name="destination" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="travelDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="travelingAlone" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PackingList" inverseName="relationship" inverseEntity="PackingList" syncable="YES"/>
+        <relationship name="packingList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PackingList" inverseName="travelInfo" inverseEntity="PackingList" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PackingList" positionX="-513" positionY="-0" width="128" height="103"/>
+        <element name="PackingList" positionX="-513" positionY="-0" width="128" height="88"/>
         <element name="TravelInfo" positionX="-209" positionY="-36" width="128" height="103"/>
     </elements>
 </model>

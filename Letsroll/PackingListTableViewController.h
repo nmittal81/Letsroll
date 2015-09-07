@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TravelInfo;
+
 @interface PackingListTableViewController : UITableViewController
+
+@property (nonatomic, strong) TravelInfo *travelInfo;
 
 @end

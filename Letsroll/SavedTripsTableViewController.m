@@ -8,9 +8,12 @@
 
 #import "SavedTripsTableViewController.h"
 #import "AppDelegate.h"
+#import "PackingListTableViewController.h"
+#import "TravelInfo.h"
 
 @interface SavedTripsTableViewController ()
 @property (nonatomic, retain) NSMutableArray *resultsArray;
+@property (nonatomic, strong) TravelInfo *selectedTravelInfo;
 @end
 
 @implementation SavedTripsTableViewController
@@ -59,8 +62,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"travelInfo" forIndexPath:indexPath];
     
     // Configure the cell...
-    NSManagedObject *matches = [self.resultsArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [matches valueForKey:@"destination"];
+    TravelInfo *travelInfo = [self.resultsArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [travelInfo valueForKey:@"destination"];
     
     return cell;
 }
@@ -68,6 +71,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.resultsArray count] > 0) {
         [self performSegueWithIdentifier:@"ShowPackingList" sender:self];
+        self.selectedTravelInfo = [self.resultsArray objectAtIndex:indexPath.row];
     }
 }
 
@@ -138,14 +142,19 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"ShowPackingList"]) {
+        PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
+        vc.travelInfo = self.selectedTravelInfo;
+        
+    }
 }
-*/
+
 
 @end

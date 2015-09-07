@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "ActionSheetPicker.h"
 #import "PackingListTableViewController.h"
+#import "TravelInfo.h"
 
 #define GOOGLE_PLACE_API_KEY @"AIzaSyDmX6cnQE2jqvQ4xMEArLWtEJbKXNFUUnM"
 
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) UITextField *nameTextField;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
 @property (weak, nonatomic) NSTimer *textTimer;
+@property (strong, nonatomic) TravelInfo *travelInfo;
 - (IBAction)familySwitchChanged:(id)sender;
 - (IBAction)submitTravelInfo:(id)sender;
 
@@ -195,19 +197,20 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSManagedObject *travelInfo;
-    travelInfo = [NSEntityDescription
+    self.travelInfo = [NSEntityDescription
                   insertNewObjectForEntityForName:@"TravelInfo"
                   inManagedObjectContext:context];
-    [travelInfo setValue: self.citySelectorTextField.text forKey:@"destination"];
-    [travelInfo setValue: self.dateTextField.text forKey:@"travelDate"];
-    [travelInfo setValue: [NSNumber numberWithBool:self.familySwitch.on] forKey:@"travelingAlone"];
+    [self.travelInfo setValue: self.citySelectorTextField.text forKey:@"destination"];
+    [self.travelInfo setValue: self.dateTextField.text forKey:@"travelDate"];
+    [self.travelInfo setValue: [NSNumber numberWithBool:self.familySwitch.on] forKey:@"travelingAlone"];
 
     NSError *error;
     [context save:&error];
     if (error) {
         UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Unable to save info" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         [self presentViewController:errorAlert animated:NO completion:nil];
+    } else {
+        [self performSegueWithIdentifier:@"showPacking" sender:self];
     }
 }
 
@@ -216,9 +219,9 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"ShowPacking"]) {
+    if ([segue.identifier isEqualToString:@"showPacking"]) {
         PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
-//        vc.travelID = [self.objectID URIRepresentation];
+        vc.travelInfo = self.travelInfo;
         
     }
 }

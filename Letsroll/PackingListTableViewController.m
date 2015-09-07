@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "PackingItemTableViewCell.h"
 #import "NewPackingItemTableViewCell.h"
+#import "PackingList.h"
+#import "TravelInfo.h"
 
 @interface PackingListTableViewController () <NewPackingItemTableViewCellDelegate, PackingItemTableViewCellDelegate>
 @property (nonatomic, retain) NSMutableArray *packingListArray;
@@ -28,8 +30,8 @@
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"PackingList"];
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelId = %@", self.travelID];
-//    request.predicate = predicate;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.travelInfo];
+    request.predicate = predicate;
     
     NSError *error = nil;
     
@@ -143,12 +145,13 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSManagedObject *packingItem;
+    PackingList *packingItem;
     packingItem = [NSEntityDescription
                   insertNewObjectForEntityForName:@"PackingList"
                   inManagedObjectContext:context];
     [packingItem setValue: name forKey:@"name"];
     [packingItem setValue: [NSNumber numberWithBool:NO] forKey:@"isPacked"];
+    [packingItem setValue:self.travelInfo forKey:@"travelInfo"];
     
     NSError *error;
     [context save:&error];
