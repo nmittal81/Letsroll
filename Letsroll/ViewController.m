@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "AppDelegate.h"
 #import "ActionSheetPicker.h"
+#import "PackingListTableViewController.h"
 
 #define GOOGLE_PLACE_API_KEY @"AIzaSyDmX6cnQE2jqvQ4xMEArLWtEJbKXNFUUnM"
 
@@ -20,7 +21,8 @@
 @property (strong, nonatomic) ActionSheetDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UISwitch *familySwitch;
 @property (weak, nonatomic) UITextField *nameTextField;
-
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
+@property (weak, nonatomic) NSTimer *textTimer;
 - (IBAction)familySwitchChanged:(id)sender;
 - (IBAction)submitTravelInfo:(id)sender;
 
@@ -85,8 +87,13 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (self.textTimer) {
+        [self.textTimer invalidate];
+        [self.activityIndicatorView stopAnimating];
+        [self.activityIndicatorView removeFromSuperview];
+    }
     
-    [NSTimer scheduledTimerWithTimeInterval:1.5
+    self.textTimer = [NSTimer scheduledTimerWithTimeInterval:1.5
                                      target:self
                                    selector:@selector(timerFired:)
                                    userInfo:nil
@@ -97,6 +104,11 @@
 }
 
 - (void)timerFired:(id)timer {
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicatorView.center = CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height / 2.0);
+    [self.view addSubview: self.activityIndicatorView];
+    
+    [self.activityIndicatorView startAnimating];
     NSString *searchQuery = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&type=regions&key=%@", self.citySelectorTextField.text,GOOGLE_PLACE_API_KEY];
     
     searchQuery = [searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
@@ -113,7 +125,6 @@
                                                                error:&error];
         
         NSArray *tempData = [json objectForKey:@"predictions"];
-        NSLog(@"Temp data is %@", tempData);
         self.cityDataArray = (NSMutableArray*)tempData;
         self.citySelectorTableView.hidden = NO;
         [self.citySelectorTableView reloadData];
@@ -137,6 +148,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (self.activityIndicatorView) {
+        [self.activityIndicatorView stopAnimating];
+        [self.activityIndicatorView removeFromSuperview];
+        self.activityIndicatorView = nil;
+    }
     UITableViewCell *cell = [self setUpStandardCellInTable:tableView WithIdentifier:@"CityCell"];
     
     if( self.cityDataArray == nil ) {
@@ -197,5 +213,13 @@
 
 - (void) showSavedTrips:(id) sender {
     [self performSegueWithIdentifier:@"showSavedTrips" sender:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ShowPacking"]) {
+        PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
+//        vc.travelID = [self.objectID URIRepresentation];
+        
+    }
 }
 @end

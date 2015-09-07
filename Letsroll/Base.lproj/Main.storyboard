@@ -67,7 +67,7 @@
                                 <state key="normal" title="Lets roll!!!"/>
                                 <connections>
                                     <action selector="submitTravelInfo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5sm-a1-DjJ"/>
-                                    <segue destination="ebN-8K-UaY" kind="show" id="6n9-f1-zhk"/>
+                                    <segue destination="ebN-8K-UaY" kind="show" identifier="showPacking" id="6n9-f1-zhk"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Set your departure date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THi-zE-Iww">

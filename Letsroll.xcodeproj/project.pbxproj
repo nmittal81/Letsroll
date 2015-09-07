@@ -21,6 +21,7 @@
 		7CA7CBAE1B98D5EE001BD0B6 /* Trips.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAD1B98D5EE001BD0B6 /* Trips.storyboard */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBB31B9B43BA001BD0B6 /* PackingItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBB21B9B43BA001BD0B6 /* PackingItemTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBB61B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBB51B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		7CA7CBB91B9DB23F001BD0B6 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBB81B9DB23F001BD0B6 /* Utility.m */; settings = {ASSET_TAGS = (); }; };
 		7CF16B751B977CAA007D58C2 /* Packing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CF16B741B977CAA007D58C2 /* Packing.storyboard */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,8 @@
 		7CA7CBB21B9B43BA001BD0B6 /* PackingItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackingItemTableViewCell.m; sourceTree = "<group>"; };
 		7CA7CBB41B9B43C8001BD0B6 /* NewPackingItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPackingItemTableViewCell.h; sourceTree = "<group>"; };
 		7CA7CBB51B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPackingItemTableViewCell.m; sourceTree = "<group>"; };
+		7CA7CBB71B9DB23F001BD0B6 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		7CA7CBB81B9DB23F001BD0B6 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		7CF16B741B977CAA007D58C2 /* Packing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Packing.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +130,8 @@
 				7CA7CBA71B98CC77001BD0B6 /* SavedTripsTableViewController.h */,
 				7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */,
 				7CA7CBAD1B98D5EE001BD0B6 /* Trips.storyboard */,
+				7CA7CBB71B9DB23F001BD0B6 /* Utility.h */,
+				7CA7CBB81B9DB23F001BD0B6 /* Utility.m */,
 			);
 			path = Letsroll;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				7CA7CBB61B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m in Sources */,
 				7C1B1C571B972F950037EE69 /* Letsroll.xcdatamodeld in Sources */,
 				7C1B1C5A1B972F950037EE69 /* ViewController.m in Sources */,
+				7CA7CBB91B9DB23F001BD0B6 /* Utility.m in Sources */,
 				7C1B1C511B972F950037EE69 /* main.m in Sources */,
 				7CA7CBB31B9B43BA001BD0B6 /* PackingItemTableViewCell.m in Sources */,
 				7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */,

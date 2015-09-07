@@ -28,6 +28,8 @@
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"PackingList"];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelId = %@", self.travelID];
+//    request.predicate = predicate;
     
     NSError *error = nil;
     

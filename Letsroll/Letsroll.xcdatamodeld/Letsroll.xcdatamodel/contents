@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="14F27" minimumToolsVersion="Automatic">
-    <entity name="PackingList" syncable="YES">
+    <entity name="PackingList" representedClassName="PackingList" syncable="YES">
         <attribute name="isPacked" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" syncable="YES"/>
+        <attribute name="travelId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" inverseName="relationship" inverseEntity="TravelInfo" syncable="YES"/>
     </entity>
-    <entity name="TravelInfo" syncable="YES">
+    <entity name="TravelInfo" representedClassName="TravelInfo" syncable="YES">
         <attribute name="destination" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="travelDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="travelingAlone" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PackingList" syncable="YES"/>
+        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PackingList" inverseName="relationship" inverseEntity="PackingList" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PackingList" positionX="-513" positionY="-0" width="128" height="90"/>
+        <element name="PackingList" positionX="-513" positionY="-0" width="128" height="103"/>
         <element name="TravelInfo" positionX="-209" positionY="-36" width="128" height="103"/>
     </elements>
 </model>
