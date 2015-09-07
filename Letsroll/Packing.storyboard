@@ -22,7 +22,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11o-gW-7cE">
-                                            <rect key="frame" x="22" y="10" width="151" height="30"/>
+                                            <rect key="frame" x="22" y="0.0" width="151" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="151" id="mtE-qs-R06"/>
                                             </constraints>

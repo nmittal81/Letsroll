@@ -65,6 +65,11 @@
     return cell;
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.resultsArray count] > 0) {
+        [self performSegueWithIdentifier:@"ShowPackingList" sender:self];
+    }
+}
 
 
 // Override to support conditional editing of the table view.

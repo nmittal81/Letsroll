@@ -27,10 +27,21 @@
                             <outlet property="delegate" destination="HPX-HH-R9j" id="4oY-Dw-StZ"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="DbX-kS-k0Q" kind="show" identifier="ShowPackingList" id="NaL-fF-8vx"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqo-5O-7ZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="216" y="94"/>
+        </scene>
+        <!--Packing-->
+        <scene sceneID="QYV-Rq-bnf">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Packing" id="DbX-kS-k0Q" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l5V-U2-0eq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="722" y="62"/>
         </scene>
     </scenes>
 </document>
