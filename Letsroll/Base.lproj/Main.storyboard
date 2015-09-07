@@ -96,6 +96,7 @@
                         <outlet property="dateTextField" destination="3RA-xq-HYy" id="pAn-cQ-pTZ"/>
                         <outlet property="familySwitch" destination="Sfg-IY-uRi" id="RVp-lE-vuG"/>
                         <segue destination="4X2-t1-huc" kind="show" identifier="showSavedTrips" id="avY-LJ-vp8"/>
+                        <segue destination="ebN-8K-UaY" kind="show" identifier="showPacking" id="erZ-Nh-QgX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
