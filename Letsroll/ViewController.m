@@ -14,6 +14,9 @@
 
 #define GOOGLE_PLACE_API_KEY @"AIzaSyDmX6cnQE2jqvQ4xMEArLWtEJbKXNFUUnM"
 
+static NSString *showSavedTrips = @"showSavedTrips";
+static NSString *showPackingList = @"showPacking";
+
 @interface ViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *citySelectorTextField;
 @property (weak, nonatomic) IBOutlet UITableView *citySelectorTableView;
@@ -200,26 +203,44 @@
     self.travelInfo = [NSEntityDescription
                   insertNewObjectForEntityForName:@"TravelInfo"
                   inManagedObjectContext:context];
-    [self.travelInfo setValue: self.citySelectorTextField.text forKey:@"destination"];
-    [self.travelInfo setValue: self.dateTextField.text forKey:@"travelDate"];
-    [self.travelInfo setValue: [NSNumber numberWithBool:self.familySwitch.on] forKey:@"travelingAlone"];
+    self.travelInfo.destination = self.citySelectorTextField.text;
+    self.travelInfo.travelDate = self.dateTextField.text;
+    self.travelInfo.travelingAlone = [NSNumber numberWithBool:self.familySwitch.on];
 
     NSError *error;
-    [context save:&error];
-    if (error) {
+    if (![context save:&error]) {
         UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Unable to save info" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         [self presentViewController:errorAlert animated:NO completion:nil];
     } else {
-        [self performSegueWithIdentifier:@"showPacking" sender:self];
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        __block NSDate *detectedDate;
+        
+        //Detect.
+        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingAllTypes error:nil];
+        [detector enumerateMatchesInString:self.travelInfo.travelDate
+                                   options:kNilOptions
+                                     range:NSMakeRange(0, [self.travelInfo.travelDate length])
+                                usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop)
+        { detectedDate = result.date; }];
+        
+        localNotification.fireDate = detectedDate;
+        localNotification.alertBody = @"Ready to leave, make sure everything is packed up";
+        localNotification.alertAction = @"Let's check";
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        
+        [self performSegueWithIdentifier:showPackingList sender:self];
     }
 }
 
 - (void) showSavedTrips:(id) sender {
-    [self performSegueWithIdentifier:@"showSavedTrips" sender:self];
+    [self performSegueWithIdentifier:showSavedTrips sender:self];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showPacking"]) {
+    if ([segue.identifier isEqualToString:showPackingList]) {
         PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
         vc.travelInfo = self.travelInfo;
         

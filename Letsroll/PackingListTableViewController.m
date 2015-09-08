@@ -149,13 +149,12 @@
     packingItem = [NSEntityDescription
                   insertNewObjectForEntityForName:@"PackingList"
                   inManagedObjectContext:context];
-    [packingItem setValue: name forKey:@"name"];
-    [packingItem setValue: [NSNumber numberWithBool:NO] forKey:@"isPacked"];
-    [packingItem setValue:self.travelInfo forKey:@"travelInfo"];
+    packingItem.name = name;
+    packingItem.isPacked = [NSNumber numberWithBool:NO];
+    packingItem.travelInfo = self.travelInfo;
     
     NSError *error;
-    [context save:&error];
-    if (error != nil) {
+    if (![context save:&error]) {
         UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Unable to save item" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [self presentViewController:errorAlert animated:YES completion:nil];
         return;
@@ -173,13 +172,16 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSManagedObject *matches = [self.packingListArray objectAtIndex:index];
-    BOOL isPacked = [[matches valueForKey:@"isPacked"] boolValue];
+    PackingList *packingItem = [self.packingListArray objectAtIndex:index];
+    BOOL isPacked = [packingItem.isPacked boolValue];
+    packingItem.isPacked = [NSNumber numberWithBool:!isPacked];
     
-    NSManagedObject *packingItem = [self.packingListArray objectAtIndex:index];
-    [packingItem setValue:[NSNumber numberWithBool:!isPacked] forKey:@"isPacked"];
     NSError *error;
-    [context save:&error];
+    if (![context save:&error]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Unable to change status" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertController animated:NO completion:nil];
+        return;
+    }
     [self.tableView reloadData];
 }
 
