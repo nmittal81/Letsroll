@@ -9,7 +9,7 @@
 #import "SavedTripsTableViewController.h"
 #import "AppDelegate.h"
 #import "PackingListTableViewController.h"
-#import "MultipleListViewController.h"
+#import "MultipleListCollectionViewController.h"
 #import "TravelInfo.h"
 
 @interface SavedTripsTableViewController ()
@@ -168,7 +168,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
         if ([segue.identifier isEqualToString:@"ShowMultipleLists"]) {
-            MultipleListViewController *vc = (MultipleListViewController*) segue.destinationViewController;
+            MultipleListCollectionViewController *vc = (MultipleListCollectionViewController*) segue.destinationViewController;
             vc.travelerArray = self.resultsForTravelArray;
         } else if ([segue.identifier isEqualToString:@"ShowPackingList"]) {
             PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;

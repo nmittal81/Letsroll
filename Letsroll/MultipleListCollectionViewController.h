@@ -1,5 +1,5 @@
 //
-//  MultipleListViewController.h
+//  MultipleListCollectionViewController.h
 //  Letsroll
 //
 //  Created by Neha Mittal on 9/9/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MultipleListViewController : UICollectionViewController
+@interface MultipleListCollectionViewController : UICollectionViewController
 
 @property (nonatomic, strong) NSArray *travelerArray;
 
