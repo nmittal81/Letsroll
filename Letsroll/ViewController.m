@@ -11,6 +11,7 @@
 #import "ActionSheetPicker.h"
 #import "PackingListTableViewController.h"
 #import "TravelInfo.h"
+#import "TravelerInfo.h"
 
 #define GOOGLE_PLACE_API_KEY @"AIzaSyDmX6cnQE2jqvQ4xMEArLWtEJbKXNFUUnM"
 
@@ -27,7 +28,7 @@ static NSString *showPackingList = @"showPacking";
 @property (weak, nonatomic) UITextField *nameTextField;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
 @property (weak, nonatomic) NSTimer *textTimer;
-@property (strong, nonatomic) TravelInfo *travelInfo;
+@property (strong, nonatomic) TravelerInfo *travelerInfo;
 - (IBAction)familySwitchChanged:(id)sender;
 - (IBAction)submitTravelInfo:(id)sender;
 
@@ -200,26 +201,37 @@ static NSString *showPackingList = @"showPacking";
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    self.travelInfo = [NSEntityDescription
+    TravelInfo *travelInfo = [NSEntityDescription
                   insertNewObjectForEntityForName:@"TravelInfo"
                   inManagedObjectContext:context];
-    self.travelInfo.destination = self.citySelectorTextField.text;
-    self.travelInfo.travelDate = self.dateTextField.text;
-    self.travelInfo.travelingAlone = [NSNumber numberWithBool:self.familySwitch.on];
+    travelInfo.destination = self.citySelectorTextField.text;
+    travelInfo.travelDate = self.dateTextField.text;
+    
+    self.travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
+    if (self.nameTextField.text == nil || [self.nameTextField.text isEqualToString:@""]) {
+        self.nameTextField.text = @"Guest";
+    }
+    self.travelerInfo.user = self.nameTextField.text;
+    
 
     NSError *error;
     if (![context save:&error]) {
         UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Unable to save info" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         [self presentViewController:errorAlert animated:NO completion:nil];
     } else {
+        self.travelerInfo.travelInfo = travelInfo;
+        NSError *error;
+        if (![context save:&error]) {
+            return;
+        }
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         __block NSDate *detectedDate;
         
         //Detect.
         NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingAllTypes error:nil];
-        [detector enumerateMatchesInString:self.travelInfo.travelDate
+        [detector enumerateMatchesInString:travelInfo.travelDate
                                    options:kNilOptions
-                                     range:NSMakeRange(0, [self.travelInfo.travelDate length])
+                                     range:NSMakeRange(0, [travelInfo.travelDate length])
                                 usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop)
         { detectedDate = result.date; }];
         
@@ -242,7 +254,7 @@ static NSString *showPackingList = @"showPacking";
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:showPackingList]) {
         PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
-        vc.travelInfo = self.travelInfo;
+        vc.travelerInfo = self.travelerInfo;
         
     }
 }

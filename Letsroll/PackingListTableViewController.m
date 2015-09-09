@@ -30,7 +30,7 @@
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"PackingList"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.travelInfo];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelerInfo = %@", self.travelerInfo];
     request.predicate = predicate;
     
     NSError *error = nil;
@@ -151,7 +151,7 @@
                   inManagedObjectContext:context];
     packingItem.name = name;
     packingItem.isPacked = [NSNumber numberWithBool:NO];
-    packingItem.travelInfo = self.travelInfo;
+    packingItem.travelerInfo = self.travelerInfo;
     
     NSError *error;
     if (![context save:&error]) {

@@ -3,16 +3,19 @@
     <entity name="PackingList" representedClassName="PackingList" syncable="YES">
         <attribute name="isPacked" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="travelInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" inverseName="packingList" inverseEntity="TravelInfo" syncable="YES"/>
+        <relationship name="travelerInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelerInfo" syncable="YES"/>
+    </entity>
+    <entity name="TravelerInfo" representedClassName="TravelerInfo" syncable="YES">
+        <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="travelInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" syncable="YES"/>
     </entity>
     <entity name="TravelInfo" representedClassName="TravelInfo" syncable="YES">
         <attribute name="destination" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="travelDate" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="travelingAlone" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="packingList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PackingList" inverseName="travelInfo" inverseEntity="PackingList" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PackingList" positionX="-513" positionY="-0" width="128" height="88"/>
-        <element name="TravelInfo" positionX="-209" positionY="-36" width="128" height="103"/>
+        <element name="PackingList" positionX="-513" positionY="-0" width="128" height="90"/>
+        <element name="TravelerInfo" positionX="-333" positionY="36" width="128" height="75"/>
+        <element name="TravelInfo" positionX="-209" positionY="-36" width="128" height="75"/>
     </elements>
 </model>

@@ -70,8 +70,8 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.resultsArray count] > 0) {
-        [self performSegueWithIdentifier:@"ShowPackingList" sender:self];
         self.selectedTravelInfo = [self.resultsArray objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"ShowPackingList" sender:self];
     }
 }
 
@@ -151,7 +151,19 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"ShowPackingList"]) {
         PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
-        vc.travelInfo = self.selectedTravelInfo;
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"TravelerInfo"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.selectedTravelInfo];
+        request.predicate = predicate;
+        
+        NSError *error = nil;
+        
+        NSArray *results = [context executeFetchRequest:request error:&error];
+        
+        
+        vc.travelerInfo = (TravelerInfo*)[results objectAtIndex:0];
         
     }
 }

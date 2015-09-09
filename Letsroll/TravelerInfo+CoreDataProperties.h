@@ -1,5 +1,5 @@
 //
-//  PackingList+CoreDataProperties.m
+//  TravelerInfo+CoreDataProperties.h
 //  Letsroll
 //
 //  Created by Neha Mittal on 9/9/15.
@@ -9,12 +9,15 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "PackingList+CoreDataProperties.h"
+#import "TravelerInfo.h"
 
-@implementation PackingList (CoreDataProperties)
+NS_ASSUME_NONNULL_BEGIN
 
-@dynamic isPacked;
-@dynamic name;
-@dynamic travelerInfo;
+@interface TravelerInfo (CoreDataProperties)
+
+@property (nullable, nonatomic, retain) NSString *user;
+@property (nullable, nonatomic, retain) TravelInfo *travelInfo;
 
 @end
+
+NS_ASSUME_NONNULL_END

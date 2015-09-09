@@ -2,7 +2,7 @@
 //  TravelInfo+CoreDataProperties.m
 //  Letsroll
 //
-//  Created by Neha Mittal on 9/7/15.
+//  Created by Neha Mittal on 9/9/15.
 //  Copyright © 2015 Neha Mittal. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,7 +15,5 @@
 
 @dynamic destination;
 @dynamic travelDate;
-@dynamic travelingAlone;
-@dynamic packingList;
 
 @end

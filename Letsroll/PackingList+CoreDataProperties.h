@@ -2,7 +2,7 @@
 //  PackingList+CoreDataProperties.h
 //  Letsroll
 //
-//  Created by Neha Mittal on 9/7/15.
+//  Created by Neha Mittal on 9/9/15.
 //  Copyright © 2015 Neha Mittal. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSNumber *isPacked;
 @property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) TravelInfo *travelInfo;
+@property (nullable, nonatomic, retain) TravelerInfo *travelerInfo;
 
 @end
 

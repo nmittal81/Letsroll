@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class TravelInfo;
+@class TravelerInfo;
 
 @interface PackingListTableViewController : UITableViewController
 
-@property (nonatomic, strong) TravelInfo *travelInfo;
+@property (nonatomic, strong) TravelerInfo *travelerInfo;
 
 @end

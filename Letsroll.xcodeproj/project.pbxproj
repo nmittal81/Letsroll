@@ -16,6 +16,8 @@
 		7C1B1C5F1B972F950037EE69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C1B1C5E1B972F950037EE69 /* Images.xcassets */; };
 		7C1B1C621B972F950037EE69 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1B1C601B972F950037EE69 /* LaunchScreen.xib */; };
 		7C1B1C6E1B972F950037EE69 /* LetsrollTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B1C6D1B972F950037EE69 /* LetsrollTests.m */; };
+		7C2C650F1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C650C1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		7C2C65101BA0821C005693BA /* TravelerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C650E1BA0821C005693BA /* TravelerInfo.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBA91B98CC77001BD0B6 /* SavedTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAB1B98D1F3001BD0B6 /* PackingListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBAE1B98D5EE001BD0B6 /* Trips.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAD1B98D5EE001BD0B6 /* Trips.storyboard */; settings = {ASSET_TAGS = (); }; };
@@ -57,6 +59,10 @@
 		7C1B1C671B972F950037EE69 /* LetsrollTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LetsrollTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1B1C6C1B972F950037EE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C1B1C6D1B972F950037EE69 /* LetsrollTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LetsrollTests.m; sourceTree = "<group>"; };
+		7C2C650B1BA0821C005693BA /* TravelerInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TravelerInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		7C2C650C1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TravelerInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		7C2C650D1BA0821C005693BA /* TravelerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelerInfo.h; sourceTree = "<group>"; };
+		7C2C650E1BA0821C005693BA /* TravelerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelerInfo.m; sourceTree = "<group>"; };
 		7CA7CBA71B98CC77001BD0B6 /* SavedTripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedTripsTableViewController.h; sourceTree = "<group>"; };
 		7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedTripsTableViewController.m; sourceTree = "<group>"; };
 		7CA7CBAA1B98D1F3001BD0B6 /* PackingListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackingListTableViewController.h; sourceTree = "<group>"; };
@@ -138,6 +144,10 @@
 				7C1B1C5E1B972F950037EE69 /* Images.xcassets */,
 				7C1B1C601B972F950037EE69 /* LaunchScreen.xib */,
 				7C1B1C551B972F950037EE69 /* Letsroll.xcdatamodeld */,
+				7C2C650B1BA0821C005693BA /* TravelerInfo+CoreDataProperties.h */,
+				7C2C650C1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m */,
+				7C2C650D1BA0821C005693BA /* TravelerInfo.h */,
+				7C2C650E1BA0821C005693BA /* TravelerInfo.m */,
 				7CA7CBC61B9DCB57001BD0B6 /* PackingList+CoreDataProperties.h */,
 				7CA7CBC71B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m */,
 				7CA7CBC81B9DCB57001BD0B6 /* PackingList.h */,
@@ -348,9 +358,11 @@
 				7C1B1C541B972F950037EE69 /* AppDelegate.m in Sources */,
 				7CA7CBB61B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m in Sources */,
 				7CA7CBD01B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m in Sources */,
+				7C2C65101BA0821C005693BA /* TravelerInfo.m in Sources */,
 				7C1B1C571B972F950037EE69 /* Letsroll.xcdatamodeld in Sources */,
 				7C1B1C5A1B972F950037EE69 /* ViewController.m in Sources */,
 				7CA7CBB91B9DB23F001BD0B6 /* Utility.m in Sources */,
+				7C2C650F1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m in Sources */,
 				7C1B1C511B972F950037EE69 /* main.m in Sources */,
 				7CA7CBB31B9B43BA001BD0B6 /* PackingItemTableViewCell.m in Sources */,
 				7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */,

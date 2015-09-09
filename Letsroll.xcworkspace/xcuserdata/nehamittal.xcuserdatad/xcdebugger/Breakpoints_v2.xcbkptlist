@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Letsroll/ViewController.m"
-            timestampString = "463451971.360079"
+            timestampString = "463505315.978908"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279">
+            startingLineNumber = "286"
+            endingLineNumber = "286">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -71,13 +71,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Letsroll/ViewController.m"
-            timestampString = "463502289.292115"
+            filePath = "Letsroll/SavedTripsTableViewController.m"
+            timestampString = "463505520.321569"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

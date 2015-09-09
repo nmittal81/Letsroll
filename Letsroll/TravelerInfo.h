@@ -1,19 +1,19 @@
 //
-//  PackingList.h
+//  TravelerInfo.h
 //  Letsroll
 //
-//  Created by Neha Mittal on 9/7/15.
+//  Created by Neha Mittal on 9/9/15.
 //  Copyright © 2015 Neha Mittal. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class TravelerInfo;
+@class TravelInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PackingList : NSManagedObject
+@interface TravelerInfo : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "PackingList+CoreDataProperties.h"
+#import "TravelerInfo+CoreDataProperties.h"
