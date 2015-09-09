@@ -55,7 +55,7 @@ static NSString *showPackingList = @"showPacking";
              self.nameTextField = textField;
          }];
         [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [self.parentViewController presentViewController:alertController animated:YES completion:nil];
     }
     self.citySelectorTableView.hidden = YES;
     self.navigationItem.title = @"Let's Roll";
