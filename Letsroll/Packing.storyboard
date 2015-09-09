@@ -22,13 +22,18 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11o-gW-7cE">
-                                            <rect key="frame" x="22" y="0.0" width="151" height="44"/>
+                                            <rect key="frame" x="22" y="0.0" width="200" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="151" id="mtE-qs-R06"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="mtE-qs-R06"/>
+                                                </mask>
+                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjp-bg-GYS">
                                             <rect key="frame" x="350" y="10" width="19" height="22"/>
@@ -46,12 +51,17 @@
                                         <constraint firstItem="11o-gW-7cE" firstAttribute="centerY" secondItem="Qer-Od-cmk" secondAttribute="centerY" id="GPJ-ag-62v"/>
                                         <constraint firstItem="11o-gW-7cE" firstAttribute="leading" secondItem="Qer-Od-cmk" secondAttribute="leadingMargin" constant="20" id="Hg7-Q1-d5I"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="rjp-bg-GYS" secondAttribute="trailing" constant="188" id="JU3-j7-nFh"/>
+                                        <constraint firstItem="11o-gW-7cE" firstAttribute="centerY" secondItem="rjp-bg-GYS" secondAttribute="centerY" id="QV6-tI-CCy"/>
                                         <constraint firstItem="11o-gW-7cE" firstAttribute="top" secondItem="rjp-bg-GYS" secondAttribute="top" id="VLL-uD-hmH"/>
                                         <constraint firstAttribute="trailing" secondItem="rjp-bg-GYS" secondAttribute="trailing" constant="20" id="ael-ch-r22"/>
                                         <constraint firstItem="rjp-bg-GYS" firstAttribute="leading" secondItem="11o-gW-7cE" secondAttribute="trailing" constant="185" id="eld-yR-bKf"/>
+                                        <constraint firstItem="11o-gW-7cE" firstAttribute="baseline" secondItem="rjp-bg-GYS" secondAttribute="baseline" id="gzf-4P-Dth"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="QV6-tI-CCy"/>
+                                            <exclude reference="VLL-uD-hmH"/>
+                                            <exclude reference="gzf-4P-Dth"/>
                                             <exclude reference="JU3-j7-nFh"/>
                                             <exclude reference="eld-yR-bKf"/>
                                         </mask>

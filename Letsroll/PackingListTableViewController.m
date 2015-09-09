@@ -92,9 +92,52 @@
     [addOptionsAlertController addAction:addNewPackingList];
     
     UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
+        
+        travelerInfo.user = @"Kitchen";
+        travelerInfo.travelInfo = self.travelerInfo.travelInfo;
+        NSError *error;
+        if([context save:&error]) {
+            self.travelerInfo = travelerInfo;
+            [self updateView];
+        }
         
     }];
     [addOptionsAlertController addAction:addKitchenPackingList];
+    
+    UIAlertAction *addMiscPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for some last minute things to do?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
+        
+        travelerInfo.user = @"Misc";
+        travelerInfo.travelInfo = self.travelerInfo.travelInfo;
+        NSError *error;
+        if([context save:&error]) {
+            self.travelerInfo = travelerInfo;
+            [self updateView];
+        }
+        
+    }];
+    [addOptionsAlertController addAction:addMiscPackingList];
+    
+    UIAlertAction *addDestPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for stuff to buy when you reach your destination?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
+        
+        travelerInfo.user = @"Destination";
+        travelerInfo.travelInfo = self.travelerInfo.travelInfo;
+        NSError *error;
+        if([context save:&error]) {
+            self.travelerInfo = travelerInfo;
+            [self updateView];
+        }
+        
+    }];
+    [addOptionsAlertController addAction:addDestPackingList];
     
     [self presentViewController:addOptionsAlertController animated:YES completion:nil];
     

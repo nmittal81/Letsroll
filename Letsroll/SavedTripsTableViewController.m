@@ -149,22 +149,24 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"ShowPackingList"]) {
-        PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"TravelerInfo"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.selectedTravelInfo];
+    request.predicate = predicate;
+    
+    NSError *error = nil;
+    
+    NSArray *results = [context executeFetchRequest:request error:&error];
+    if (results.count > 1) {
         
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        NSManagedObjectContext *context = [appDelegate managedObjectContext];
-        NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"TravelerInfo"];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.selectedTravelInfo];
-        request.predicate = predicate;
-        
-        NSError *error = nil;
-        
-        NSArray *results = [context executeFetchRequest:request error:&error];
-        
-        
-        vc.travelerInfo = (TravelerInfo*)[results objectAtIndex:0];
-        
+    } else {
+        if ([segue.identifier isEqualToString:@"ShowPackingList"]) {
+            PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
+            
+            vc.travelerInfo = (TravelerInfo*)[results objectAtIndex:0];
+            
+        }
     }
 }
 
