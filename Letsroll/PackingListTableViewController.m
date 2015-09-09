@@ -11,7 +11,7 @@
 #import "PackingItemTableViewCell.h"
 #import "NewPackingItemTableViewCell.h"
 #import "PackingList.h"
-#import "TravelInfo.h"
+#import "TravelerInfo.h"
 
 @interface PackingListTableViewController () <NewPackingItemTableViewCellDelegate, PackingItemTableViewCellDelegate>
 @property (nonatomic, retain) NSMutableArray *packingListArray;
@@ -26,6 +26,21 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewPackingList)];
+    NSArray *actionButtonItems = @[addItem];
+    self.navigationItem.rightBarButtonItems = actionButtonItems;
+    [self updateView];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void) updateView {
+    self.navigationItem.title = self.travelerInfo.user;
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
@@ -37,16 +52,52 @@
     
     NSArray *results = [context executeFetchRequest:request error:&error];
     self.packingListArray = [results mutableCopy];
-    
-//    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItemsToPackingList:)];
-//    NSArray *actionButtonItems = @[shareItem];
-//    self.navigationItem.rightBarButtonItems = actionButtonItems;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) addNewPackingList {
+    UIAlertController *addOptionsAlertController = [UIAlertController alertControllerWithTitle:@"Would you like to:" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *addNewPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add a new packing list for fellow traveler", @"Add new list") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Let's get started" message:@"Please enter your name" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+                                       NSManagedObjectContext *context = [appDelegate managedObjectContext];
+                                       TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
+                                       
+                                       travelerInfo.user = [alertController.textFields objectAtIndex:0].text;
+                                       travelerInfo.travelInfo = self.travelerInfo.travelInfo;
+                                       NSError *error;
+                                       if([context save:&error]) {
+                                           self.travelerInfo = travelerInfo;
+                                           [self updateView];
+                                       }
+                                   }];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+         {
+             textField.placeholder = NSLocalizedString(@"LoginPlaceholder", @"Login");
+         }];
+        [alertController addAction:okAction];
+        [self.parentViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }];
+    [addOptionsAlertController addAction:addNewPackingList];
+    
+    UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        
+    }];
+    [addOptionsAlertController addAction:addKitchenPackingList];
+    
+    [self presentViewController:addOptionsAlertController animated:YES completion:nil];
+    
 }
 
 #pragma mark - Table view data source

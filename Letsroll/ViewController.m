@@ -133,7 +133,9 @@ static NSString *showPackingList = @"showPacking";
         NSArray *tempData = [json objectForKey:@"predictions"];
         self.cityDataArray = (NSMutableArray*)tempData;
         self.citySelectorTableView.hidden = NO;
-        [self.citySelectorTableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.citySelectorTableView reloadData];
+        });
     }];
     
     [task resume];

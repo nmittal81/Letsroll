@@ -13,5 +13,6 @@
 @interface PackingListTableViewController : UITableViewController
 
 @property (nonatomic, strong) TravelerInfo *travelerInfo;
+@property (nonatomic, strong) NSString *userInfo;
 
 @end
