@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MultipleListViewController : UIViewController
+@interface MultipleListViewController : UICollectionViewController
 
 @property (nonatomic, strong) NSArray *travelerArray;
 

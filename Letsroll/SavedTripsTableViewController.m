@@ -14,6 +14,7 @@
 
 @interface SavedTripsTableViewController ()
 @property (nonatomic, retain) NSMutableArray *resultsArray;
+@property (nonatomic, retain) NSMutableArray *resultsForTravelArray;
 @property (nonatomic, strong) TravelInfo *selectedTravelInfo;
 @end
 
@@ -72,7 +73,23 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.resultsArray count] > 0) {
         self.selectedTravelInfo = [self.resultsArray objectAtIndex:indexPath.row];
-        [self performSegueWithIdentifier:@"ShowPackingList" sender:self];
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"TravelerInfo"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.selectedTravelInfo];
+        request.predicate = predicate;
+        
+        NSError *error = nil;
+        
+        NSArray *results = [context executeFetchRequest:request error:&error];
+        self.resultsForTravelArray = [results mutableCopy];
+        
+        if (results.count > 1) {
+            [self performSegueWithIdentifier:@"ShowMultipleLists" sender:self];
+        } else {
+            [self performSegueWithIdentifier:@"ShowPackingList" sender:self];
+        }
     }
 }
 
@@ -150,30 +167,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"TravelerInfo"];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.selectedTravelInfo];
-    request.predicate = predicate;
-    
-    NSError *error = nil;
-    
-    NSArray *results = [context executeFetchRequest:request error:&error];
-    
-    if (results.count > 1) {
         if ([segue.identifier isEqualToString:@"ShowMultipleLists"]) {
             MultipleListViewController *vc = (MultipleListViewController*) segue.destinationViewController;
-            vc.travelerArray = results;
-        }
-        
-    } else {
-        if ([segue.identifier isEqualToString:@"ShowPackingList"]) {
+            vc.travelerArray = self.resultsForTravelArray;
+        } else if ([segue.identifier isEqualToString:@"ShowPackingList"]) {
             PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
             
-            vc.travelerInfo = (TravelerInfo*)[results objectAtIndex:0];
+            vc.travelerInfo = (TravelerInfo*)[self.resultsForTravelArray objectAtIndex:0];
             
         }
-    }
 }
 
 
