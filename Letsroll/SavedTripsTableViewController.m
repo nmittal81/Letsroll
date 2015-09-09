@@ -9,6 +9,7 @@
 #import "SavedTripsTableViewController.h"
 #import "AppDelegate.h"
 #import "PackingListTableViewController.h"
+#import "MultipleListViewController.h"
 #import "TravelInfo.h"
 
 @interface SavedTripsTableViewController ()
@@ -158,7 +159,12 @@
     NSError *error = nil;
     
     NSArray *results = [context executeFetchRequest:request error:&error];
+    
     if (results.count > 1) {
+        if ([segue.identifier isEqualToString:@"ShowMultipleLists"]) {
+            MultipleListViewController *vc = (MultipleListViewController*) segue.destinationViewController;
+            vc.travelerArray = results;
+        }
         
     } else {
         if ([segue.identifier isEqualToString:@"ShowPackingList"]) {
