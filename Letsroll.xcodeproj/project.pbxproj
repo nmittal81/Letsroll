@@ -19,8 +19,7 @@
 		7C2C650F1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C650C1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		7C2C65101BA0821C005693BA /* TravelerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C650E1BA0821C005693BA /* TravelerInfo.m */; settings = {ASSET_TAGS = (); }; };
 		7C3BC7311BA0BB8400D54F23 /* MultipleList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3BC7301BA0BB8400D54F23 /* MultipleList.storyboard */; settings = {ASSET_TAGS = (); }; };
-		7C3BC7381BA0C12500D54F23 /* MultipleListCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC7371BA0C12500D54F23 /* MultipleListCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
-		7C3BC73B1BA0C25300D54F23 /* PackingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC73A1BA0C25300D54F23 /* PackingCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		7C3BC73E1BA1C6D100D54F23 /* MultipleListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC73D1BA1C6D100D54F23 /* MultipleListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBA91B98CC77001BD0B6 /* SavedTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAB1B98D1F3001BD0B6 /* PackingListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBAE1B98D5EE001BD0B6 /* Trips.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAD1B98D5EE001BD0B6 /* Trips.storyboard */; settings = {ASSET_TAGS = (); }; };
@@ -66,10 +65,8 @@
 		7C2C650D1BA0821C005693BA /* TravelerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelerInfo.h; sourceTree = "<group>"; };
 		7C2C650E1BA0821C005693BA /* TravelerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelerInfo.m; sourceTree = "<group>"; };
 		7C3BC7301BA0BB8400D54F23 /* MultipleList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MultipleList.storyboard; sourceTree = "<group>"; };
-		7C3BC7361BA0C12500D54F23 /* MultipleListCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleListCollectionViewController.h; sourceTree = "<group>"; };
-		7C3BC7371BA0C12500D54F23 /* MultipleListCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleListCollectionViewController.m; sourceTree = "<group>"; };
-		7C3BC7391BA0C25300D54F23 /* PackingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackingCollectionViewCell.h; sourceTree = "<group>"; };
-		7C3BC73A1BA0C25300D54F23 /* PackingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackingCollectionViewCell.m; sourceTree = "<group>"; };
+		7C3BC73C1BA1C6D100D54F23 /* MultipleListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleListTableViewController.h; sourceTree = "<group>"; };
+		7C3BC73D1BA1C6D100D54F23 /* MultipleListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleListTableViewController.m; sourceTree = "<group>"; };
 		7CA7CBA71B98CC77001BD0B6 /* SavedTripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedTripsTableViewController.h; sourceTree = "<group>"; };
 		7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedTripsTableViewController.m; sourceTree = "<group>"; };
 		7CA7CBAA1B98D1F3001BD0B6 /* PackingListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackingListTableViewController.h; sourceTree = "<group>"; };
@@ -215,10 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				7C3BC7301BA0BB8400D54F23 /* MultipleList.storyboard */,
-				7C3BC7361BA0C12500D54F23 /* MultipleListCollectionViewController.h */,
-				7C3BC7371BA0C12500D54F23 /* MultipleListCollectionViewController.m */,
-				7C3BC7391BA0C25300D54F23 /* PackingCollectionViewCell.h */,
-				7C3BC73A1BA0C25300D54F23 /* PackingCollectionViewCell.m */,
+				7C3BC73C1BA1C6D100D54F23 /* MultipleListTableViewController.h */,
+				7C3BC73D1BA1C6D100D54F23 /* MultipleListTableViewController.m */,
 			);
 			name = MultipleListView;
 			sourceTree = "<group>";
@@ -398,15 +393,14 @@
 				7CA7CBD11B9DCB57001BD0B6 /* TravelInfo.m in Sources */,
 				7C1B1C541B972F950037EE69 /* AppDelegate.m in Sources */,
 				7CA7CBB61B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m in Sources */,
-				7C3BC7381BA0C12500D54F23 /* MultipleListCollectionViewController.m in Sources */,
 				7CA7CBD01B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m in Sources */,
 				7C2C65101BA0821C005693BA /* TravelerInfo.m in Sources */,
 				7C1B1C571B972F950037EE69 /* Letsroll.xcdatamodeld in Sources */,
 				7C1B1C5A1B972F950037EE69 /* ViewController.m in Sources */,
 				7C2C650F1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m in Sources */,
-				7C3BC73B1BA0C25300D54F23 /* PackingCollectionViewCell.m in Sources */,
 				7C1B1C511B972F950037EE69 /* main.m in Sources */,
 				7CA7CBB31B9B43BA001BD0B6 /* PackingItemTableViewCell.m in Sources */,
+				7C3BC73E1BA1C6D100D54F23 /* MultipleListTableViewController.m in Sources */,
 				7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */,
 				7CA7CBCE1B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m in Sources */,
 				7CA7CBA91B98CC77001BD0B6 /* SavedTripsTableViewController.m in Sources */,

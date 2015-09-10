@@ -17,6 +17,7 @@
 
 static NSString *showSavedTrips = @"showSavedTrips";
 static NSString *showPackingList = @"showPacking";
+static NSString *userFromUserDefaults = @"userName";
 
 @interface ViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *citySelectorTextField;
@@ -39,7 +40,7 @@ static NSString *showPackingList = @"showPacking";
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *userName = [userDefaults objectForKey:@"userName"];
+    NSString *userName = [userDefaults objectForKey:userFromUserDefaults];
     if (userName == nil || [userName isEqualToString:@""]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Let's get started" message:@"Please enter your name" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction
@@ -52,7 +53,7 @@ static NSString *showPackingList = @"showPacking";
                                    }];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
          {
-             textField.placeholder = NSLocalizedString(@"LoginPlaceholder", @"Login");
+             textField.placeholder = NSLocalizedString(@"", @"Login");
              self.nameTextField = textField;
          }];
         [alertController addAction:okAction];
@@ -131,10 +132,25 @@ static NSString *showPackingList = @"showPacking";
                                                                error:&error];
         
         NSArray *tempData = [json objectForKey:@"predictions"];
+#ifdef DEBUG
+        NSLog(@"Temp data is %@", tempData);
+#endif
         self.cityDataArray = (NSMutableArray*)tempData;
-        self.citySelectorTableView.hidden = NO;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.citySelectorTableView reloadData];
+            if ([self.cityDataArray count] == 0) {
+                UIAlertController *noCityAlert = [UIAlertController alertControllerWithTitle:@"No city found" message:@"Try your search again" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [self.activityIndicatorView stopAnimating];
+                    self.citySelectorTextField.text = @"";
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }];
+                [noCityAlert addAction:okAction];
+                [self presentViewController:noCityAlert animated:YES completion:nil];
+            } else {
+                
+                    [self.citySelectorTableView reloadData];
+               
+            }
         });
     }];
     
@@ -155,6 +171,8 @@ static NSString *showPackingList = @"showPacking";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.citySelectorTableView.hidden = NO;
     
     if (self.activityIndicatorView) {
         [self.activityIndicatorView stopAnimating];
@@ -210,10 +228,12 @@ static NSString *showPackingList = @"showPacking";
     travelInfo.travelDate = self.dateTextField.text;
     
     self.travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
-    if (self.nameTextField.text == nil || [self.nameTextField.text isEqualToString:@""]) {
-        self.nameTextField.text = @"Guest";
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *defaultUserName = [userDefaults objectForKey:userFromUserDefaults];
+    if (defaultUserName == nil || [defaultUserName isEqualToString:@""]) {
+        defaultUserName = @"Guest";
     }
-    self.travelerInfo.user = self.nameTextField.text;
+    self.travelerInfo.user = defaultUserName;
     
 
     NSError *error;

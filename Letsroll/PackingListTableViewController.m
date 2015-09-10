@@ -138,6 +138,11 @@
         
     }];
     [addOptionsAlertController addAction:addDestPackingList];
+
+    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"No Thanks" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [addOptionsAlertController addAction:doneAction];
     
     [self presentViewController:addOptionsAlertController animated:YES completion:nil];
     
