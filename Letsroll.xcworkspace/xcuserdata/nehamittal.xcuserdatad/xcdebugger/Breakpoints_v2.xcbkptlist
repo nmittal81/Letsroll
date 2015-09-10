@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Letsroll/PackingListTableViewController.m"
-            timestampString = "463589128.055665"
+            timestampString = "463597082.123213"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "-addNewPackingList"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Letsroll/PackingListTableViewController.m"
-            timestampString = "463510485.575309"
+            timestampString = "463597082.123213"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "-updateView"
             landmarkType = "5">
          </BreakpointContent>
@@ -110,6 +110,22 @@
             startingLineNumber = "233"
             endingLineNumber = "233"
             landmarkName = "-submitTravelInfo:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Letsroll/PackingListTableViewController.m"
+            timestampString = "463597080.686398"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "-addReminderForTraveler"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

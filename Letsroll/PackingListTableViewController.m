@@ -10,10 +10,15 @@
 #import "AppDelegate.h"
 #import "PackingItemTableViewCell.h"
 #import "NewPackingItemTableViewCell.h"
+#import "ReminderTableViewCell.h"
 #import "PackingList.h"
 #import "TravelerInfo.h"
 
-@interface PackingListTableViewController () <NewPackingItemTableViewCellDelegate, PackingItemTableViewCellDelegate>
+static NSString *reminderCell = @"ReminderCell";
+static NSString *packingCell = @"PackingCell";
+static NSString *newItemCell = @"NewItem";
+
+@interface PackingListTableViewController () <NewPackingItemTableViewCellDelegate, PackingItemTableViewCellDelegate, ReminderTableViewCellDelegate>
 @property (nonatomic, retain) NSMutableArray *packingListArray;
 
 @end
@@ -144,29 +149,36 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.packingListArray count]+1;
+    if ([self.packingListArray count] > 0) {
+        return [self.packingListArray count] + 2;
+    }
+    return 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < [self.packingListArray count]) {
-        PackingItemTableViewCell *packingCell = [tableView dequeueReusableCellWithIdentifier:@"PackingCell" forIndexPath:indexPath];
+        PackingItemTableViewCell *packingItemCell = [tableView dequeueReusableCellWithIdentifier:packingCell forIndexPath:indexPath];
         NSManagedObject *matches = [self.packingListArray objectAtIndex:indexPath.row];
-        packingCell.itemName.text = [matches valueForKey:@"name"];
+        packingItemCell.itemName.text = [matches valueForKey:@"name"];
         BOOL isPacked = [[matches valueForKey:@"isPacked"] boolValue];
         if (isPacked) {
-            [packingCell.itemPackedButton setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateNormal];
+            [packingItemCell.itemPackedButton setImage:[UIImage imageNamed:@"checked"] forState:UIControlStateNormal];
         } else {
-            [packingCell.itemPackedButton setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
+            [packingItemCell.itemPackedButton setImage:[UIImage imageNamed:@"unchecked"] forState:UIControlStateNormal];
         }
-        packingCell.delegate = self;
-        packingCell.index = indexPath.row;
-        return packingCell;
-    } else {
-        NewPackingItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NewItem" forIndexPath:indexPath];
+        packingItemCell.delegate = self;
+        packingItemCell.index = indexPath.row;
+        return packingItemCell;
+    } else if (indexPath.row == [self.packingListArray count])  {
+        NewPackingItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:newItemCell forIndexPath:indexPath];
         cell.delegate = self;
     
         return cell;
+    } else {
+        ReminderTableViewCell *reminderTableCell = [tableView dequeueReusableCellWithIdentifier:reminderCell forIndexPath:indexPath];
+        reminderTableCell.delegate = self;
+        return reminderTableCell;
     }
 }
 
@@ -271,6 +283,12 @@
         return;
     }
     [self.tableView reloadData];
+}
+
+#pragma mark ReminderTableViewCellDelegate
+
+-(void) addReminderForTraveler {
+    
 }
 
 @end

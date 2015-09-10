@@ -20,6 +20,7 @@
 		7C2C65101BA0821C005693BA /* TravelerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C650E1BA0821C005693BA /* TravelerInfo.m */; settings = {ASSET_TAGS = (); }; };
 		7C3BC7311BA0BB8400D54F23 /* MultipleList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3BC7301BA0BB8400D54F23 /* MultipleList.storyboard */; settings = {ASSET_TAGS = (); }; };
 		7C3BC73E1BA1C6D100D54F23 /* MultipleListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC73D1BA1C6D100D54F23 /* MultipleListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		7CA40FA01BA1ECC7005EDE3A /* ReminderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA40F9F1BA1ECC7005EDE3A /* ReminderTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBA91B98CC77001BD0B6 /* SavedTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAB1B98D1F3001BD0B6 /* PackingListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7CA7CBAE1B98D5EE001BD0B6 /* Trips.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAD1B98D5EE001BD0B6 /* Trips.storyboard */; settings = {ASSET_TAGS = (); }; };
@@ -67,6 +68,8 @@
 		7C3BC7301BA0BB8400D54F23 /* MultipleList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MultipleList.storyboard; sourceTree = "<group>"; };
 		7C3BC73C1BA1C6D100D54F23 /* MultipleListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleListTableViewController.h; sourceTree = "<group>"; };
 		7C3BC73D1BA1C6D100D54F23 /* MultipleListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleListTableViewController.m; sourceTree = "<group>"; };
+		7CA40F9E1BA1ECC7005EDE3A /* ReminderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderTableViewCell.h; sourceTree = "<group>"; };
+		7CA40F9F1BA1ECC7005EDE3A /* ReminderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderTableViewCell.m; sourceTree = "<group>"; };
 		7CA7CBA71B98CC77001BD0B6 /* SavedTripsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedTripsTableViewController.h; sourceTree = "<group>"; };
 		7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedTripsTableViewController.m; sourceTree = "<group>"; };
 		7CA7CBAA1B98D1F3001BD0B6 /* PackingListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackingListTableViewController.h; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 				7CA7CBB21B9B43BA001BD0B6 /* PackingItemTableViewCell.m */,
 				7CA7CBB41B9B43C8001BD0B6 /* NewPackingItemTableViewCell.h */,
 				7CA7CBB51B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m */,
+				7CA40F9E1BA1ECC7005EDE3A /* ReminderTableViewCell.h */,
+				7CA40F9F1BA1ECC7005EDE3A /* ReminderTableViewCell.m */,
 			);
 			name = PackingList;
 			sourceTree = "<group>";
@@ -400,6 +405,7 @@
 				7C2C650F1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m in Sources */,
 				7C1B1C511B972F950037EE69 /* main.m in Sources */,
 				7CA7CBB31B9B43BA001BD0B6 /* PackingItemTableViewCell.m in Sources */,
+				7CA40FA01BA1ECC7005EDE3A /* ReminderTableViewCell.m in Sources */,
 				7C3BC73E1BA1C6D100D54F23 /* MultipleListTableViewController.m in Sources */,
 				7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */,
 				7CA7CBCE1B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m in Sources */,
