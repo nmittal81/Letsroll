@@ -28,12 +28,93 @@ static NSString *reusableCell = @"TravelerCell";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewPackingList)];
+    NSArray *actionButtonItems = @[addItem];
+    self.navigationItem.rightBarButtonItems = actionButtonItems;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) addNewPackingList {
+    TravelerInfo *firstTravelerInfo = (TravelerInfo*)[self.travelerArray objectAtIndex:0];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
+    travelerInfo.travelInfo = firstTravelerInfo.travelInfo;
+    
+    
+    UIAlertController *addOptionsAlertController = [UIAlertController alertControllerWithTitle:@"Would you like to:" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *addNewPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add a new packing list for fellow traveler", @"Add new list") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Let's get started" message:@"Please enter your name" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       travelerInfo.user = [alertController.textFields objectAtIndex:0].text;
+                                       NSError *error;
+                                       if([context save:&error]) {
+                                           self.selectedTravelInfo = travelerInfo;
+                                           [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
+                                       }
+                                   }];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+         {
+             textField.placeholder = NSLocalizedString(@"LoginPlaceholder", @"Login");
+         }];
+        [alertController addAction:okAction];
+        [self.parentViewController presentViewController:alertController animated:YES completion:nil];
+        
+        
+    }];
+    [addOptionsAlertController addAction:addNewPackingList];
+    
+    UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        travelerInfo.user = @"Kitchen";
+        NSError *error;
+        if([context save:&error]) {
+            self.selectedTravelInfo = travelerInfo;
+            [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
+        }
+        
+    }];
+    [addOptionsAlertController addAction:addKitchenPackingList];
+    
+    UIAlertAction *addMiscPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for some last minute things to do?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        travelerInfo.user = @"Misc";
+        NSError *error;
+        if([context save:&error]) {
+            self.selectedTravelInfo = travelerInfo;
+            [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
+        }
+        
+    }];
+    [addOptionsAlertController addAction:addMiscPackingList];
+    
+    UIAlertAction *addDestPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for stuff to buy when you reach your destination?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        
+        travelerInfo.user = @"Destination";
+        NSError *error;
+        if([context save:&error]) {
+            self.selectedTravelInfo = travelerInfo;
+            [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
+        }
+        
+    }];
+    [addOptionsAlertController addAction:addDestPackingList];
+    
+    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"No Thanks" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [addOptionsAlertController addAction:doneAction];
+    
+    [self presentViewController:addOptionsAlertController animated:YES completion:nil];
+    
 }
 
 #pragma mark - Table view data source
