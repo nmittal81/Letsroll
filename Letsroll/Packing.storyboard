@@ -33,6 +33,9 @@
                                         <constraint firstItem="Xuo-2F-rye" firstAttribute="centerX" secondItem="NxX-B1-hIT" secondAttribute="centerX" id="J7u-wC-aZX"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="reminderButton" destination="Xuo-2F-rye" id="7zq-Gp-ei0"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PackingCell" id="Pey-TV-LeG" customClass="PackingItemTableViewCell">
                                 <rect key="frame" x="0.0" y="72" width="600" height="44"/>

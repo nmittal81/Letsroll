@@ -11,6 +11,7 @@
 #import "PackingItemTableViewCell.h"
 #import "NewPackingItemTableViewCell.h"
 #import "ReminderTableViewCell.h"
+#import "ActionSheetDatePicker.h"
 #import "PackingList.h"
 #import "TravelerInfo.h"
 
@@ -19,7 +20,13 @@ static NSString *packingCell = @"PackingCell";
 static NSString *newItemCell = @"NewItem";
 
 @interface PackingListTableViewController () <NewPackingItemTableViewCellDelegate, PackingItemTableViewCellDelegate, ReminderTableViewCellDelegate>
+
 @property (nonatomic, retain) NSMutableArray *packingListArray;
+@property (strong, nonatomic) ActionSheetDatePicker *datePicker;
+@property (strong, nonatomic) ReminderTableViewCell *reminderTableCell;
+@property (strong, nonatomic) NSDateFormatter *dateFormatter;
+
+-(void) scheduleLocalNotification:(NSDate*)date;
 
 @end
 
@@ -30,6 +37,8 @@ static NSString *newItemCell = @"NewItem";
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    [self.dateFormatter setDateStyle:NSDateFormatterLongStyle];
     
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -152,7 +161,7 @@ static NSString *newItemCell = @"NewItem";
     if ([self.packingListArray count] > 0) {
         return [self.packingListArray count] + 2;
     }
-    return 1;
+    return 2;
 }
 
 
@@ -178,6 +187,11 @@ static NSString *newItemCell = @"NewItem";
     } else {
         ReminderTableViewCell *reminderTableCell = [tableView dequeueReusableCellWithIdentifier:reminderCell forIndexPath:indexPath];
         reminderTableCell.delegate = self;
+        if (self.travelerInfo.reminderDate != nil ) {
+            [reminderTableCell.reminderButton setTitle:[self.dateFormatter stringFromDate:self.travelerInfo.reminderDate] forState:UIControlStateNormal];
+        }
+
+        self.reminderTableCell = reminderTableCell;
         return reminderTableCell;
     }
 }
@@ -282,13 +296,70 @@ static NSString *newItemCell = @"NewItem";
         [self presentViewController:alertController animated:NO completion:nil];
         return;
     }
-    [self.tableView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 #pragma mark ReminderTableViewCellDelegate
 
 -(void) addReminderForTraveler {
     
+    self.datePicker = [ActionSheetDatePicker showPickerWithTitle:@"" datePickerMode:UIDatePickerModeDateAndTime selectedDate:[NSDate date] target:self action:@selector(dateSelected) origin:self.reminderTableCell];
+    self.datePicker.timeZone = [NSTimeZone systemTimeZone];
+    
+    
+}
+
+-(void) dateSelected {
+    
+    UIDatePicker *datePicker = (UIDatePicker*)self.datePicker.configuredPickerView;
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    self.travelerInfo.reminderDate = datePicker.date;
+    NSError *error;
+    if (![context save:&error]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Unable to change status" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertController animated:NO completion:nil];
+        return;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.reminderTableCell.reminderButton setTitle:[self.dateFormatter stringFromDate:datePicker.date] forState:UIControlStateNormal];
+    });
+    [self scheduleLocalNotification:datePicker.date];
+    
+}
+
+-(void) scheduleLocalNotification:(NSDate*)date {
+    //Check to see if same notification exists
+    
+    NSString *alertBody = [NSString stringWithFormat:@"%@ traveling to %@ on %@", self.travelerInfo.user, [self.travelerInfo getDestinationName], [self.travelerInfo getTravelDate]];
+    
+    NSArray *notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    for (id localN in notifications) {
+        UILocalNotification *tempNotification = (UILocalNotification*)localN;
+        if ([tempNotification.alertBody isEqualToString:alertBody]) {
+            [[UIApplication sharedApplication] cancelLocalNotification:tempNotification];
+        }
+        
+    }
+    
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    
+    localNotification.fireDate = date;
+    
+#ifdef DEBUG
+    NSLog(alertBody);
+#endif
+    
+    localNotification.alertBody = alertBody;
+    localNotification.alertAction = @"Let's check";
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 @end

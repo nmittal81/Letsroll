@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TravelerInfo (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *user;
+@property (nullable, nonatomic, retain) NSDate *reminderDate;
 @property (nullable, nonatomic, retain) TravelInfo *travelInfo;
 
 @end

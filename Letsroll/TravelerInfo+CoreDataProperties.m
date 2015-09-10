@@ -15,5 +15,6 @@
 
 @dynamic user;
 @dynamic travelInfo;
+@dynamic reminderDate;
 
 @end

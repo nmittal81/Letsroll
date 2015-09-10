@@ -6,6 +6,7 @@
         <relationship name="travelerInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelerInfo" syncable="YES"/>
     </entity>
     <entity name="TravelerInfo" representedClassName="TravelerInfo" syncable="YES">
+        <attribute name="reminderDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="travelInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" syncable="YES"/>
     </entity>
@@ -15,7 +16,7 @@
     </entity>
     <elements>
         <element name="PackingList" positionX="-513" positionY="-0" width="128" height="90"/>
-        <element name="TravelerInfo" positionX="-333" positionY="36" width="128" height="75"/>
+        <element name="TravelerInfo" positionX="-333" positionY="36" width="128" height="90"/>
         <element name="TravelInfo" positionX="-209" positionY="-36" width="128" height="75"/>
     </elements>
 </model>

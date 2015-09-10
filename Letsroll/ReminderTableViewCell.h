@@ -16,6 +16,8 @@
 
 @interface ReminderTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *reminderButton;
+@property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
 @property (weak, nonatomic) id<ReminderTableViewCellDelegate> delegate;
 - (IBAction)reminderAction:(id)sender;
 
