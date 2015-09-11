@@ -43,7 +43,8 @@ static NSString *newItemCell = @"NewItem";
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewPackingList)];
-    NSArray *actionButtonItems = @[addItem];
+    UIBarButtonItem *importItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(updateViewWithAllItemsForTraveler)];
+    NSArray *actionButtonItems = @[addItem, importItem];
     self.navigationItem.rightBarButtonItems = actionButtonItems;
     [self updateView];
 }
@@ -360,6 +361,59 @@ static NSString *newItemCell = @"NewItem";
     localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+}
+
+
+-(void) updateViewWithAllItemsForTraveler {
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"TravelerInfo" inManagedObjectContext:context];
+    [request setEntity:entity];
+    
+    NSPredicate *searchFilter = [NSPredicate predicateWithFormat:@"user = %@", self.travelerInfo.user];
+    request.predicate = searchFilter;
+    NSError *error = nil;
+    NSArray *results = [context executeFetchRequest:request error:&error];
+    
+    NSEntityDescription *entity1 = [NSEntityDescription entityForName:@"PackingList" inManagedObjectContext:context];
+    [request setEntity:entity1];
+    
+    NSPredicate *searchFilter1 = [NSPredicate predicateWithFormat:@"travelerInfo in %@", results];
+    request.predicate = searchFilter1;
+    NSError *error1 = nil;
+    NSArray *results1 = [context executeFetchRequest:request error:&error1];
+    self.packingListArray = [[NSMutableArray alloc] init];
+    
+    for (PackingList *pack in results1) {
+        for (PackingList *pack1 in self.packingListArray) {
+            if ([pack1.name isEqualToString:pack.name]) {
+                return;
+            }
+        }
+
+        PackingList *packingItem;
+        packingItem = [NSEntityDescription
+                       insertNewObjectForEntityForName:@"PackingList"
+                       inManagedObjectContext:context];
+        packingItem.name = pack.name;
+        packingItem.isPacked = [NSNumber numberWithBool:NO];
+        packingItem.travelerInfo = self.travelerInfo;
+        
+        NSError *error;
+        if (![context save:&error]) {
+            UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Unable to save item" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [self presentViewController:errorAlert animated:YES completion:nil];
+            return;
+        }
+        [self.packingListArray addObject:packingItem];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 @end

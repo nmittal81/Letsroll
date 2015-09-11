@@ -7,10 +7,10 @@
 //
 
 #import "PackingList.h"
-#import "TravelInfo.h"
+#import "TravelerInfo.h"
+#import "AppDelegate.h"
 
 @implementation PackingList
 
-// Insert code here to add functionality to your managed object subclass
 
 @end
