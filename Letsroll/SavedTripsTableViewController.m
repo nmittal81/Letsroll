@@ -9,6 +9,7 @@
 #import "SavedTripsTableViewController.h"
 #import "AppDelegate.h"
 #import "MultipleListTableViewController.h"
+#import "SavedTripsTableViewCell.h"
 #import "TravelInfo.h"
 
 @interface SavedTripsTableViewController ()
@@ -60,11 +61,12 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"travelInfo" forIndexPath:indexPath];
+    SavedTripsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"travelInfo" forIndexPath:indexPath];
     
     // Configure the cell...
     TravelInfo *travelInfo = [self.resultsArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [travelInfo valueForKey:@"destination"];
+    cell.destinationLabel.text = travelInfo.destination;
+    cell.dateLabel.text = travelInfo.travelDate;
     
     return cell;
 }

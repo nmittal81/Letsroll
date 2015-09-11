@@ -3,24 +3,48 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Saved Trips Table View Controller-->
         <scene sceneID="kFt-Sa-ffx">
             <objects>
                 <tableViewController id="HPX-HH-R9j" customClass="SavedTripsTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="WON-u7-N6s">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="WON-u7-N6s">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="travelInfo" id="Spc-ov-odf">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="travelInfo" rowHeight="60" id="Spc-ov-odf" customClass="SavedTripsTableViewCell">
+                                <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Spc-ov-odf" id="Z9G-WJ-DNp">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHR-lJ-DLa">
+                                            <rect key="frame" x="146" y="0.0" width="413" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hov-3L-IJz">
+                                            <rect key="frame" x="146" y="36" width="421" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="hov-3L-IJz" firstAttribute="leading" secondItem="Z9G-WJ-DNp" secondAttribute="leadingMargin" constant="20" id="5Kd-be-wBF"/>
+                                        <constraint firstItem="hov-3L-IJz" firstAttribute="top" secondItem="kHR-lJ-DLa" secondAttribute="bottom" constant="6" id="MQ5-8Q-Hez"/>
+                                        <constraint firstItem="kHR-lJ-DLa" firstAttribute="leading" secondItem="Z9G-WJ-DNp" secondAttribute="leadingMargin" constant="20" id="gT6-vx-5Wk"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateLabel" destination="hov-3L-IJz" id="3aK-KS-yNE"/>
+                                    <outlet property="destinationLabel" destination="kHR-lJ-DLa" id="iUH-iB-MFx"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

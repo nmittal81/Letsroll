@@ -10,6 +10,7 @@
 #import "PackingListTableViewController.h"
 #import "AppDelegate.h"
 #import "TravelerInfo.h"
+#import "TravelInfo.h"
 
 static NSString *reusableCell = @"TravelerCell";
 
@@ -31,6 +32,16 @@ static NSString *reusableCell = @"TravelerCell";
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewPackingList)];
     NSArray *actionButtonItems = @[addItem];
     self.navigationItem.rightBarButtonItems = actionButtonItems;
+    NSString *travelDestination = self.travelInfo.destination;
+    NSRange range = [travelDestination rangeOfString:@","];
+    if (range.location != NSNotFound)
+    {
+        //range.location is start of substring
+        //range.length is length of substring
+        travelDestination = [travelDestination substringToIndex:range.location];
+    }
+    
+    self.navigationItem.title = travelDestination;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
