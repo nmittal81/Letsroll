@@ -43,7 +43,8 @@ static NSString *newItemCell = @"NewItem";
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewPackingList)];
-    UIBarButtonItem *importItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(updateViewWithAllItemsForTraveler)];
+    UIBarButtonItem * importItem = [[UIBarButtonItem alloc] initWithTitle:@"Import" style:UIBarButtonItemStylePlain target:self action:@selector(updateViewWithAllItemsForTraveler)];
+    
     NSArray *actionButtonItems = @[addItem, importItem];
     self.navigationItem.rightBarButtonItems = actionButtonItems;
     [self updateView];
@@ -55,7 +56,7 @@ static NSString *newItemCell = @"NewItem";
 }
 
 - (void) updateView {
-    self.navigationItem.title = self.travelerInfo.user;
+    self.navigationItem.title = [self.travelerInfo.user capitalizedString];
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];

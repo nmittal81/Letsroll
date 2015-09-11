@@ -141,7 +141,7 @@ static NSString *reusableCell = @"TravelerCell";
     
     // Configure the cell...
     TravelerInfo *traveler = (TravelerInfo*)[self.resultsForTravelArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = traveler.user;
+    cell.textLabel.text = [traveler.user capitalizedString];
     return cell;
 }
 
