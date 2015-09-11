@@ -8,7 +8,6 @@
 
 #import "SavedTripsTableViewController.h"
 #import "AppDelegate.h"
-#import "PackingListTableViewController.h"
 #import "MultipleListTableViewController.h"
 #import "TravelInfo.h"
 
@@ -73,23 +72,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.resultsArray count] > 0) {
         self.selectedTravelInfo = [self.resultsArray objectAtIndex:indexPath.row];
-        
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        NSManagedObjectContext *context = [appDelegate managedObjectContext];
-        NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"TravelerInfo"];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.selectedTravelInfo];
-        request.predicate = predicate;
-        
-        NSError *error = nil;
-        
-        NSArray *results = [context executeFetchRequest:request error:&error];
-        self.resultsForTravelArray = [results mutableCopy];
-        
-        if (results.count > 1) {
-            [self performSegueWithIdentifier:@"ShowMultipleLists" sender:self];
-        } else {
-            [self performSegueWithIdentifier:@"ShowPackingList" sender:self];
-        }
+        [self performSegueWithIdentifier:@"ShowMultipleLists" sender:self];
     }
 }
 
@@ -169,12 +152,7 @@
     // Pass the selected object to the new view controller.
         if ([segue.identifier isEqualToString:@"ShowMultipleLists"]) {
             MultipleListTableViewController *vc = (MultipleListTableViewController*) segue.destinationViewController;
-            vc.travelerArray = [self.resultsForTravelArray mutableCopy];
-        } else if ([segue.identifier isEqualToString:@"ShowPackingList"]) {
-            PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
-            
-            vc.travelerInfo = (TravelerInfo*)[self.resultsForTravelArray objectAtIndex:0];
-            
+            vc.travelInfo = self.selectedTravelInfo;
         }
 }
 

@@ -238,7 +238,7 @@ static NSString *userFromUserDefaults = @"userName";
 
     NSError *error;
     if (![context save:&error]) {
-        UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Unable to save info" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Unable to save info" message:error.description preferredStyle:UIAlertControllerStyleAlert];
         [self presentViewController:errorAlert animated:NO completion:nil];
     } else {
         self.travelerInfo.travelInfo = travelInfo;

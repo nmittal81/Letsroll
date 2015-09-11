@@ -73,11 +73,7 @@ static NSString *newItemCell = @"NewItem";
 }
 
 - (void) addNewPackingList {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
-    travelerInfo.travelInfo = self.travelerInfo.travelInfo;
-    
+   
     UIAlertController *addOptionsAlertController = [UIAlertController alertControllerWithTitle:@"Would you like to:" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *addNewPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add a new packing list for fellow traveler", @"Add new list") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
@@ -89,12 +85,7 @@ static NSString *newItemCell = @"NewItem";
                                    handler:^(UIAlertAction *action)
                                    {
                                        
-                                       travelerInfo.user = [alertController.textFields objectAtIndex:0].text;
-                                       NSError *error;
-                                       if([context save:&error]) {
-                                           self.travelerInfo = travelerInfo;
-                                           [self updateView];
-                                       }
+                                       [self addNewListFor:[alertController.textFields objectAtIndex:0].text];
                                    }];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
          {
@@ -108,37 +99,21 @@ static NSString *newItemCell = @"NewItem";
     [addOptionsAlertController addAction:addNewPackingList];
     
     UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        travelerInfo.user = @"Kitchen";
-        NSError *error;
-        if([context save:&error]) {
-            self.travelerInfo = travelerInfo;
-            [self updateView];
-        }
+        [self addNewListFor:@"Kitchen"];
         
     }];
     [addOptionsAlertController addAction:addKitchenPackingList];
     
     UIAlertAction *addMiscPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for some last minute things to do?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         
-        travelerInfo.user = @"Misc";
-        NSError *error;
-        if([context save:&error]) {
-            self.travelerInfo = travelerInfo;
-            [self updateView];
-        }
+        [self addNewListFor:@"Misc"];
         
     }];
     [addOptionsAlertController addAction:addMiscPackingList];
     
     UIAlertAction *addDestPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for stuff to buy when you reach your destination?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         
-        travelerInfo.user = @"Destination";
-        
-        NSError *error;
-        if([context save:&error]) {
-            self.travelerInfo = travelerInfo;
-            [self updateView];
-        }
+        [self addNewListFor:@"Destination"];
         
     }];
     [addOptionsAlertController addAction:addDestPackingList];
@@ -150,6 +125,19 @@ static NSString *newItemCell = @"NewItem";
     
     [self presentViewController:addOptionsAlertController animated:YES completion:nil];
     
+}
+
+- (void) addNewListFor:(NSString*)user {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
+    travelerInfo.travelInfo = self.travelerInfo.travelInfo;
+    travelerInfo.user = user;
+    NSError *error;
+    if([context save:&error]) {
+        self.travelerInfo = travelerInfo;
+        [self updateView];
+    }
 }
 
 #pragma mark - Table view data source
@@ -410,6 +398,16 @@ static NSString *newItemCell = @"NewItem";
             return;
         }
         [self.packingListArray addObject:packingItem];
+    }
+    if ([self.packingListArray count] == 0) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Sorry no data found for traveler" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", @"Ok") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];

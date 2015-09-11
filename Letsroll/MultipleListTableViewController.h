@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TravelInfo;
+
 @interface MultipleListTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray *travelerArray;
+@property (nonatomic, strong) TravelInfo *travelInfo;
 
 @end

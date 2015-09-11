@@ -16,7 +16,7 @@ static NSString *reusableCell = @"TravelerCell";
 @interface MultipleListTableViewController ()
 
 @property (nonatomic, strong) TravelerInfo *selectedTravelInfo;
-
+@property (nonatomic, strong) NSMutableArray *resultsForTravelArray;
 @end
 
 @implementation MultipleListTableViewController
@@ -33,18 +33,32 @@ static NSString *reusableCell = @"TravelerCell";
     self.navigationItem.rightBarButtonItems = actionButtonItems;
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"TravelerInfo"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.travelInfo];
+    request.predicate = predicate;
+    
+    NSError *error = nil;
+    
+    NSArray *results = [context executeFetchRequest:request error:&error];
+    self.resultsForTravelArray = [results mutableCopy];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (void) addNewPackingList {
-    TravelerInfo *firstTravelerInfo = (TravelerInfo*)[self.travelerArray objectAtIndex:0];
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
-    travelerInfo.travelInfo = firstTravelerInfo.travelInfo;
-    
     
     UIAlertController *addOptionsAlertController = [UIAlertController alertControllerWithTitle:@"Would you like to:" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
@@ -56,12 +70,7 @@ static NSString *reusableCell = @"TravelerCell";
                                    style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction *action)
                                    {
-                                       travelerInfo.user = [alertController.textFields objectAtIndex:0].text;
-                                       NSError *error;
-                                       if([context save:&error]) {
-                                           self.selectedTravelInfo = travelerInfo;
-                                           [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
-                                       }
+                                       [self addNewListFor:[alertController.textFields objectAtIndex:0].text];
                                    }];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
          {
@@ -75,35 +84,20 @@ static NSString *reusableCell = @"TravelerCell";
     [addOptionsAlertController addAction:addNewPackingList];
     
     UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        travelerInfo.user = @"Kitchen";
-        NSError *error;
-        if([context save:&error]) {
-            self.selectedTravelInfo = travelerInfo;
-            [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
-        }
+        [self addNewListFor:@"Kitchen"];
         
     }];
     [addOptionsAlertController addAction:addKitchenPackingList];
     
     UIAlertAction *addMiscPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for some last minute things to do?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        travelerInfo.user = @"Misc";
-        NSError *error;
-        if([context save:&error]) {
-            self.selectedTravelInfo = travelerInfo;
-            [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
-        }
+        [self addNewListFor:@"Misc"];
         
     }];
     [addOptionsAlertController addAction:addMiscPackingList];
     
     UIAlertAction *addDestPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for stuff to buy when you reach your destination?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         
-        travelerInfo.user = @"Destination";
-        NSError *error;
-        if([context save:&error]) {
-            self.selectedTravelInfo = travelerInfo;
-            [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
-        }
+        [self addNewListFor:@"Destination"];
         
     }];
     [addOptionsAlertController addAction:addDestPackingList];
@@ -117,6 +111,20 @@ static NSString *reusableCell = @"TravelerCell";
     
 }
 
+- (void) addNewListFor:(NSString*)user {
+    TravelerInfo *firstTravelerInfo = (TravelerInfo*)[self.resultsForTravelArray objectAtIndex:0];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
+    travelerInfo.travelInfo = firstTravelerInfo.travelInfo;
+    travelerInfo.user = user;
+    NSError *error;
+    if([context save:&error]) {
+        self.selectedTravelInfo = travelerInfo;
+        [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -124,7 +132,7 @@ static NSString *reusableCell = @"TravelerCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.travelerArray count];
+    return [self.resultsForTravelArray count];
 }
 
 
@@ -132,7 +140,7 @@ static NSString *reusableCell = @"TravelerCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusableCell forIndexPath:indexPath];
     
     // Configure the cell...
-    TravelerInfo *traveler = (TravelerInfo*)[self.travelerArray objectAtIndex:indexPath.row];
+    TravelerInfo *traveler = (TravelerInfo*)[self.resultsForTravelArray objectAtIndex:indexPath.row];
     cell.textLabel.text = traveler.user;
     return cell;
 }
@@ -161,12 +169,12 @@ static NSString *reusableCell = @"TravelerCell";
                                  //Do some thing here
                                  AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
                                  NSManagedObjectContext *context = appdelegate.managedObjectContext;
-                                 TravelerInfo *travelerInfo = [self.travelerArray objectAtIndex:indexPath.row];
+                                 TravelerInfo *travelerInfo = [self.resultsForTravelArray objectAtIndex:indexPath.row];
                                  [context deleteObject:travelerInfo];
                                  NSError *error;
                                  [context save:&error];
                                  if (error == nil) {
-                                     [self.travelerArray removeObjectAtIndex:indexPath.row];
+                                     [self.resultsForTravelArray removeObjectAtIndex:indexPath.row];
                                      [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                                      [tableView reloadData];
                                  }
@@ -207,8 +215,8 @@ static NSString *reusableCell = @"TravelerCell";
 */
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.travelerArray count] > 0) {
-        self.selectedTravelInfo = [self.travelerArray objectAtIndex:indexPath.row];
+    if ([self.resultsForTravelArray count] > 0) {
+        self.selectedTravelInfo = [self.resultsForTravelArray objectAtIndex:indexPath.row];
         
         [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
     }
