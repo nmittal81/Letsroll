@@ -14,5 +14,6 @@
 
 @property (nonatomic, strong) TravelerInfo *travelerInfo;
 @property (nonatomic, strong) NSString *userInfo;
+@property (nonatomic, strong) NSArray *resultsForUserArray;
 
 @end

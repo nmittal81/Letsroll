@@ -12,6 +12,7 @@
 #import "PackingListTableViewController.h"
 #import "TravelInfo.h"
 #import "TravelerInfo.h"
+#import "BasicUtility.h"
 
 #define GOOGLE_PLACE_API_KEY @"AIzaSyDmX6cnQE2jqvQ4xMEArLWtEJbKXNFUUnM"
 
@@ -222,12 +223,12 @@ static NSString *userFromUserDefaults = @"userName";
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     TravelInfo *travelInfo = [NSEntityDescription
-                  insertNewObjectForEntityForName:@"TravelInfo"
+                  insertNewObjectForEntityForName:travelEntity
                   inManagedObjectContext:context];
     travelInfo.destination = self.citySelectorTextField.text;
     travelInfo.travelDate = self.dateTextField.text;
     
-    self.travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
+    self.travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:travelerEntity inManagedObjectContext:context];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *defaultUserName = [userDefaults objectForKey:userFromUserDefaults];
     if (defaultUserName == nil || [defaultUserName isEqualToString:@""]) {
@@ -237,35 +238,37 @@ static NSString *userFromUserDefaults = @"userName";
     
 
     NSError *error;
-    if (![context save:&error]) {
-        UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Unable to save info" message:error.description preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:errorAlert animated:NO completion:nil];
-    } else {
-        self.travelerInfo.travelInfo = travelInfo;
-        NSError *error;
+    @synchronized(self) {
         if (![context save:&error]) {
-            return;
+            UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Unable to save info" message:error.description preferredStyle:UIAlertControllerStyleAlert];
+            [self presentViewController:errorAlert animated:NO completion:nil];
+        } else {
+            self.travelerInfo.travelInfo = travelInfo;
+            NSError *error;
+            if (![context save:&error]) {
+                return;
+            }
+            UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+            __block NSDate *detectedDate;
+            
+            //Detect.
+            NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingAllTypes error:nil];
+            [detector enumerateMatchesInString:travelInfo.travelDate
+                                       options:kNilOptions
+                                         range:NSMakeRange(0, [travelInfo.travelDate length])
+                                    usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop)
+            { detectedDate = result.date; }];
+            
+            localNotification.fireDate = detectedDate;
+            localNotification.alertBody = @"Ready to leave, make sure everything is packed up";
+            localNotification.alertAction = @"Let's check";
+            localNotification.timeZone = [NSTimeZone defaultTimeZone];
+            localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+            
+            [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+            
+            [self performSegueWithIdentifier:showPackingList sender:self];
         }
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        __block NSDate *detectedDate;
-        
-        //Detect.
-        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingAllTypes error:nil];
-        [detector enumerateMatchesInString:travelInfo.travelDate
-                                   options:kNilOptions
-                                     range:NSMakeRange(0, [travelInfo.travelDate length])
-                                usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop)
-        { detectedDate = result.date; }];
-        
-        localNotification.fireDate = detectedDate;
-        localNotification.alertBody = @"Ready to leave, make sure everything is packed up";
-        localNotification.alertAction = @"Let's check";
-        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-        
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-        
-        [self performSegueWithIdentifier:showPackingList sender:self];
     }
 }
 

@@ -64,6 +64,7 @@
 		7C1B1C6D1B972F950037EE69 /* LetsrollTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LetsrollTests.m; sourceTree = "<group>"; };
 		7C2630AB1BA37D2B003A05AE /* SavedTripsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedTripsTableViewCell.h; sourceTree = "<group>"; };
 		7C2630AC1BA37D2B003A05AE /* SavedTripsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedTripsTableViewCell.m; sourceTree = "<group>"; };
+		7C2630AE1BA5CDE4003A05AE /* BasicUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicUtility.h; sourceTree = "<group>"; };
 		7C2C650B1BA0821C005693BA /* TravelerInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TravelerInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
 		7C2C650C1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TravelerInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		7C2C650D1BA0821C005693BA /* TravelerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelerInfo.h; sourceTree = "<group>"; };
@@ -190,6 +191,7 @@
 				7C1B1C581B972F950037EE69 /* ViewController.h */,
 				7C1B1C591B972F950037EE69 /* ViewController.m */,
 				7C1B1C5B1B972F950037EE69 /* Main.storyboard */,
+				7C2630AE1BA5CDE4003A05AE /* BasicUtility.h */,
 			);
 			name = "App main";
 			sourceTree = "<group>";

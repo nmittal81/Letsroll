@@ -14,10 +14,12 @@
 #import "ActionSheetDatePicker.h"
 #import "PackingList.h"
 #import "TravelerInfo.h"
+#import "BasicUtility.h"
 
 static NSString *reminderCell = @"ReminderCell";
 static NSString *packingCell = @"PackingCell";
 static NSString *newItemCell = @"NewItem";
+
 
 @interface PackingListTableViewController () <NewPackingItemTableViewCellDelegate, PackingItemTableViewCellDelegate, ReminderTableViewCellDelegate>
 
@@ -60,7 +62,7 @@ static NSString *newItemCell = @"NewItem";
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"PackingList"];
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:packingEntity];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelerInfo = %@", self.travelerInfo];
     request.predicate = predicate;
     
@@ -99,26 +101,33 @@ static NSString *newItemCell = @"NewItem";
     }];
     [addOptionsAlertController addAction:addNewPackingList];
     
-    UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        [self addNewListFor:@"Kitchen"];
-        
-    }];
-    [addOptionsAlertController addAction:addKitchenPackingList];
+    if (![self.resultsForUserArray containsObject:kitchenList]) {
     
-    UIAlertAction *addMiscPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for some last minute things to do?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        
-        [self addNewListFor:@"Misc"];
-        
-    }];
-    [addOptionsAlertController addAction:addMiscPackingList];
+        UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            [self addNewListFor:kitchenList];
+            
+        }];
+        [addOptionsAlertController addAction:addKitchenPackingList];
+    }
     
-    UIAlertAction *addDestPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for stuff to buy when you reach your destination?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        
-        [self addNewListFor:@"Destination"];
-        
-    }];
-    [addOptionsAlertController addAction:addDestPackingList];
-
+    if (![self.resultsForUserArray containsObject:misc]) {
+        UIAlertAction *addMiscPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for some last minute things to do?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            
+            [self addNewListFor:misc];
+            
+        }];
+        [addOptionsAlertController addAction:addMiscPackingList];
+    }
+    
+    if (![self.resultsForUserArray containsObject:destination]) {
+        UIAlertAction *addDestPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for stuff to buy when you reach your destination?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            
+            [self addNewListFor:destination];
+            
+        }];
+        [addOptionsAlertController addAction:addDestPackingList];
+    }
+    
     UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"No Thanks" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
@@ -131,7 +140,7 @@ static NSString *newItemCell = @"NewItem";
 - (void) addNewListFor:(NSString*)user {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
+    TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:travelerEntity inManagedObjectContext:context];
     travelerInfo.travelInfo = self.travelerInfo.travelInfo;
     travelerInfo.user = user;
     NSError *error;
@@ -251,7 +260,7 @@ static NSString *newItemCell = @"NewItem";
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     PackingList *packingItem;
     packingItem = [NSEntityDescription
-                  insertNewObjectForEntityForName:@"PackingList"
+                  insertNewObjectForEntityForName:packingEntity
                   inManagedObjectContext:context];
     packingItem.name = name;
     packingItem.isPacked = [NSNumber numberWithBool:NO];
@@ -360,7 +369,7 @@ static NSString *newItemCell = @"NewItem";
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"TravelerInfo" inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:travelerEntity inManagedObjectContext:context];
     [request setEntity:entity];
     
     NSPredicate *searchFilter = [NSPredicate predicateWithFormat:@"user = %@", self.travelerInfo.user];
@@ -368,7 +377,7 @@ static NSString *newItemCell = @"NewItem";
     NSError *error = nil;
     NSArray *results = [context executeFetchRequest:request error:&error];
     
-    NSEntityDescription *entity1 = [NSEntityDescription entityForName:@"PackingList" inManagedObjectContext:context];
+    NSEntityDescription *entity1 = [NSEntityDescription entityForName:packingEntity inManagedObjectContext:context];
     [request setEntity:entity1];
     
     NSPredicate *searchFilter1 = [NSPredicate predicateWithFormat:@"travelerInfo in %@", results];
@@ -386,7 +395,7 @@ static NSString *newItemCell = @"NewItem";
 
         PackingList *packingItem;
         packingItem = [NSEntityDescription
-                       insertNewObjectForEntityForName:@"PackingList"
+                       insertNewObjectForEntityForName:packingEntity
                        inManagedObjectContext:context];
         packingItem.name = pack.name;
         packingItem.isPacked = [NSNumber numberWithBool:NO];

@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "TravelerInfo.h"
 #import "TravelInfo.h"
+#import "BasicUtility.h"
 
 static NSString *reusableCell = @"TravelerCell";
 
@@ -18,6 +19,7 @@ static NSString *reusableCell = @"TravelerCell";
 
 @property (nonatomic, strong) TravelerInfo *selectedTravelInfo;
 @property (nonatomic, strong) NSMutableArray *resultsForTravelArray;
+@property (nonatomic, strong) NSMutableArray *resultsForUserArray;
 @end
 
 @implementation MultipleListTableViewController
@@ -42,14 +44,19 @@ static NSString *reusableCell = @"TravelerCell";
     }
     
     self.navigationItem.title = travelDestination;
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self updateResults];
+}
+
+- (void) updateResults {
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"TravelerInfo"];
+    NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:travelerEntity];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.travelInfo];
     request.predicate = predicate;
     
@@ -57,6 +64,7 @@ static NSString *reusableCell = @"TravelerCell";
     
     NSArray *results = [context executeFetchRequest:request error:&error];
     self.resultsForTravelArray = [results mutableCopy];
+    self.resultsForUserArray = [[results valueForKey:@"user"] mutableCopy];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
@@ -94,24 +102,31 @@ static NSString *reusableCell = @"TravelerCell";
     }];
     [addOptionsAlertController addAction:addNewPackingList];
     
-    UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        [self addNewListFor:@"Kitchen"];
+    if (![self.resultsForUserArray containsObject:kitchenList]) {
         
-    }];
-    [addOptionsAlertController addAction:addKitchenPackingList];
+        UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            [self addNewListFor:kitchenList];
+            
+        }];
+        [addOptionsAlertController addAction:addKitchenPackingList];
+    }
     
-    UIAlertAction *addMiscPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for some last minute things to do?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        [self addNewListFor:@"Misc"];
-        
-    }];
-    [addOptionsAlertController addAction:addMiscPackingList];
+    if (![self.resultsForUserArray containsObject:misc]) {
+        UIAlertAction *addMiscPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for some last minute things to do?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            [self addNewListFor:misc];
+            
+        }];
+        [addOptionsAlertController addAction:addMiscPackingList];
+    }
     
-    UIAlertAction *addDestPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for stuff to buy when you reach your destination?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        
-        [self addNewListFor:@"Destination"];
-        
-    }];
-    [addOptionsAlertController addAction:addDestPackingList];
+    if (![self.resultsForUserArray containsObject:destination]) {
+        UIAlertAction *addDestPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for stuff to buy when you reach your destination?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            
+            [self addNewListFor:destination];
+            
+        }];
+        [addOptionsAlertController addAction:addDestPackingList];
+    }
     
     UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"No Thanks" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -123,12 +138,12 @@ static NSString *reusableCell = @"TravelerCell";
 }
 
 - (void) addNewListFor:(NSString*)user {
-    TravelerInfo *firstTravelerInfo = (TravelerInfo*)[self.resultsForTravelArray objectAtIndex:0];
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TravelerInfo" inManagedObjectContext:context];
-    travelerInfo.travelInfo = firstTravelerInfo.travelInfo;
+    TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:travelerEntity inManagedObjectContext:context];
+    travelerInfo.travelInfo = self.travelInfo;
     travelerInfo.user = user;
+    [self.resultsForUserArray addObject:user];
     NSError *error;
     if([context save:&error]) {
         self.selectedTravelInfo = travelerInfo;
@@ -143,7 +158,7 @@ static NSString *reusableCell = @"TravelerCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.resultsForTravelArray count];
+    return [self.resultsForUserArray count];
 }
 
 
@@ -151,8 +166,7 @@ static NSString *reusableCell = @"TravelerCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusableCell forIndexPath:indexPath];
     
     // Configure the cell...
-    TravelerInfo *traveler = (TravelerInfo*)[self.resultsForTravelArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [traveler.user capitalizedString];
+    cell.textLabel.text = [[self.resultsForUserArray objectAtIndex:indexPath.row] capitalizedString];
     return cell;
 }
 
@@ -183,11 +197,8 @@ static NSString *reusableCell = @"TravelerCell";
                                  TravelerInfo *travelerInfo = [self.resultsForTravelArray objectAtIndex:indexPath.row];
                                  [context deleteObject:travelerInfo];
                                  NSError *error;
-                                 [context save:&error];
-                                 if (error == nil) {
-                                     [self.resultsForTravelArray removeObjectAtIndex:indexPath.row];
-                                     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                                     [tableView reloadData];
+                                 if ([context save:&error]) {
+                                     [self updateResults];
                                  }
                                  
                              }];
@@ -204,7 +215,6 @@ static NSString *reusableCell = @"TravelerCell";
                                  }];
         [areYouSureAlert addAction:cancel];
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
@@ -243,6 +253,7 @@ static NSString *reusableCell = @"TravelerCell";
     if ([segue.identifier isEqualToString:@"ShowIndividualPackingList"]) {
         PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
         vc.travelerInfo = self.selectedTravelInfo;
+        vc.resultsForUserArray = self.resultsForUserArray;
     }
 }
 
