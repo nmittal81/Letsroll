@@ -14,7 +14,7 @@
 #import "TravelerInfo.h"
 #import "BasicUtility.h"
 
-#define GOOGLE_PLACE_API_KEY @"AIzaSyDmX6cnQE2jqvQ4xMEArLWtEJbKXNFUUnM"
+#define GOOGLE_PLACE_API_KEY @"AIzaSyBTq4B-NOGVwYLo2q1cGyPUtgUeuzdN55Q"
 
 static NSString *showSavedTrips = @"showSavedTrips";
 static NSString *showPackingList = @"showPacking";
