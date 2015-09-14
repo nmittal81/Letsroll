@@ -137,19 +137,21 @@ static NSString *userFromUserDefaults = @"userName";
         NSLog(@"Temp data is %@", tempData);
 #endif
         self.cityDataArray = (NSMutableArray*)tempData;
+        
+        __block ViewController *weakSelf = self;
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([self.cityDataArray count] == 0) {
+            if ([weakSelf.cityDataArray count] == 0) {
                 UIAlertController *noCityAlert = [UIAlertController alertControllerWithTitle:@"No city found" message:@"Try your search again" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                    [self.activityIndicatorView stopAnimating];
-                    self.citySelectorTextField.text = @"";
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [weakSelf.activityIndicatorView stopAnimating];
+                    weakSelf.citySelectorTextField.text = @"";
+                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
                 }];
                 [noCityAlert addAction:okAction];
-                [self presentViewController:noCityAlert animated:YES completion:nil];
+                [weakSelf presentViewController:noCityAlert animated:YES completion:nil];
             } else {
-                
-                    [self.citySelectorTableView reloadData];
+                [weakSelf.citySelectorTableView reloadData];
                
             }
         });

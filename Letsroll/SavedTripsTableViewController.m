@@ -104,11 +104,13 @@
                                  NSManagedObject *obj = [self.resultsArray objectAtIndex:indexPath.row];
                                  [context deleteObject:obj];
                                  NSError *error;
-                                 [context save:&error];
-                                 if (error == nil) {
+                                 if ([context save:&error]) {
                                      [self.resultsArray removeObjectAtIndex:indexPath.row];
                                      [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                                     [tableView reloadData];
+                                     __block SavedTripsTableViewController *weakSelf = self;
+                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                         [weakSelf.tableView reloadData];
+                                    });
                                  }
                                  
                              }];

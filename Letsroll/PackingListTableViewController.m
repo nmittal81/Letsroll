@@ -70,8 +70,14 @@ static NSString *newItemCell = @"NewItem";
     
     NSArray *results = [context executeFetchRequest:request error:&error];
     self.packingListArray = [results mutableCopy];
+    
+    [self updateTableView];
+}
+
+-(void) updateTableView {
+    __block PackingListTableViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
+        [weakSelf.tableView reloadData];
     });
 }
 
@@ -219,7 +225,7 @@ static NSString *newItemCell = @"NewItem";
         if (error == nil) {
             [self.packingListArray removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [tableView reloadData];
+            [self updateTableView];
         }
 
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -295,9 +301,7 @@ static NSString *newItemCell = @"NewItem";
         [self presentViewController:alertController animated:NO completion:nil];
         return;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
+    [self updateTableView];
 }
 
 #pragma mark ReminderTableViewCellDelegate
@@ -419,9 +423,7 @@ static NSString *newItemCell = @"NewItem";
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
+    [self updateTableView];
 }
 
 @end

@@ -66,8 +66,9 @@ static NSString *reusableCell = @"TravelerCell";
     self.resultsForTravelArray = [results mutableCopy];
     self.resultsForUserArray = [[results valueForKey:@"user"] mutableCopy];
     
+    __block MultipleListTableViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
+        [weakSelf.tableView reloadData];
     });
     
 }
