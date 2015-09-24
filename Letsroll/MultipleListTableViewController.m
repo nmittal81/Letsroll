@@ -90,7 +90,8 @@ static NSString *reusableCell = @"TravelerCell";
                                    style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction *action)
                                    {
-                                       [self addNewListFor:[alertController.textFields objectAtIndex:0].text];
+                                       UITextField *t = [alertController.textFields objectAtIndex:0];
+                                       [self addNewListFor:t.text];
                                    }];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
          {

@@ -1,12 +1,12 @@
 //
-//  ViewController.m
+//  LetsRollViewController.m
 //  Letsroll
 //
 //  Created by Neha Mittal on 9/2/15.
 //  Copyright (c) 2015 Neha Mittal. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "LetsRollViewController.h"
 #import "AppDelegate.h"
 #import "ActionSheetPicker.h"
 #import "PackingListTableViewController.h"
@@ -20,7 +20,7 @@ static NSString *showSavedTrips = @"showSavedTrips";
 static NSString *showPackingList = @"showPacking";
 static NSString *userFromUserDefaults = @"userName";
 
-@interface ViewController () <UITextFieldDelegate>
+@interface LetsRollViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *citySelectorTextField;
 @property (weak, nonatomic) IBOutlet UITableView *citySelectorTableView;
 @property (strong, nonatomic) NSMutableArray *cityDataArray;
@@ -36,7 +36,7 @@ static NSString *userFromUserDefaults = @"userName";
 
 @end
 
-@implementation ViewController
+@implementation LetsRollViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,6 +65,8 @@ static NSString *userFromUserDefaults = @"userName";
     UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showSavedTrips:)];
     NSArray *actionButtonItems = @[shareItem];
     self.navigationItem.rightBarButtonItems = actionButtonItems;
+    
+//    [self solution:@[@0,@3,@3,@7,@5,@3,@11,@1]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,11 +96,15 @@ static NSString *userFromUserDefaults = @"userName";
     self.dateTextField.text = dateString;
 }
 
+//Once we detect user has stopped typing any further we fire the backend api and get back results
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (self.textTimer) {
         [self.textTimer invalidate];
         [self.activityIndicatorView stopAnimating];
         [self.activityIndicatorView removeFromSuperview];
+        self.cityDataArray = nil;
+        self.citySelectorTableView.hidden = YES;
     }
     
     self.textTimer = [NSTimer scheduledTimerWithTimeInterval:1.5
@@ -117,7 +123,7 @@ static NSString *userFromUserDefaults = @"userName";
     [self.view addSubview: self.activityIndicatorView];
     
     [self.activityIndicatorView startAnimating];
-    NSString *searchQuery = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&type=regions&key=%@", self.citySelectorTextField.text,GOOGLE_PLACE_API_KEY];
+    NSString *searchQuery =  [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&type=regions&key=%@", self.citySelectorTextField.text,GOOGLE_PLACE_API_KEY];
     
     searchQuery = [searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     
@@ -127,18 +133,20 @@ static NSString *userFromUserDefaults = @"userName";
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
+    //We are getting back all the countries using this api, so we need to filter out from the reeturned array a smaller set and display it to the user
+    
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data
                                                              options:kNilOptions
                                                                error:&error];
         
         NSArray *tempData = [json objectForKey:@"predictions"];
+                self.cityDataArray = (NSMutableArray*)tempData;
 #ifdef DEBUG
-        NSLog(@"Temp data is %@", tempData);
+        NSLog(@"Temp data is %@", self.cityDataArray);
 #endif
-        self.cityDataArray = (NSMutableArray*)tempData;
-        
-        __block ViewController *weakSelf = self;
+       
+        __block LetsRollViewController *weakSelf = self;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([weakSelf.cityDataArray count] == 0) {
@@ -285,5 +293,85 @@ static NSString *userFromUserDefaults = @"userName";
         
     }
 }
+
+//Some test coding i undertook
+
+//-(int) solution:(NSString *) s {
+//    NSArray *prefixArray = [self getPrefixArray:s];
+//    NSArray *suffixArray = [self getSuffixArray:s];
+//    int longestProper = 0;
+//    for (int i=0; i<[prefixArray count]; i++) {
+//        if ([(NSString*)prefixArray[i] isEqualToString:(NSString*)suffixArray[i]]) {
+//            NSLog(@"Print strings %@ %@", prefixArray[i], suffixArray[i]);
+//            longestProper = i;
+//        }
+//    }
+//    NSLog(@"Proper is %d", longestProper);
+//    
+//    return longestProper;
+//}
+//
+//-(NSArray*) getPrefixArray:(NSString*)s {
+//    NSMutableArray *prefixArray = [[NSMutableArray alloc] init];
+//    for(int i=0;i< [s length]; i++) {
+//        [prefixArray addObject:[s substringWithRange:NSMakeRange(0, i)]];
+//    }
+//    return (NSArray*)prefixArray;
+//}
+//
+//-(NSArray*) getSuffixArray:(NSString*)s {
+//    NSMutableArray *suffixArray = [[NSMutableArray alloc] init];
+//    for(int i=0;i< [s length]; i++) {
+//        [suffixArray addObject:[s substringWithRange:NSMakeRange([s length]-i, i)]];
+//    }
+//    return (NSArray*)suffixArray;
+//}
+
+//NSArray *t = @[1,4, -1,3,2];
+//-(int) solution:(NSArray *)a {
+//    // write your code in Objective-C 2.0
+//
+//    int value = 0;
+//    NSNumber *nextIndex = a[0];
+//    while ([nextIndex integerValue] != -1) {
+//        nextIndex = a[[nextIndex integerValue]];
+//        value++;
+//        continue;
+//    }
+//    if ([nextIndex integerValue] == -1) {
+//        value++;
+//        NSLog(@"Value is %d", value);
+//        return value;
+//    }
+//    return 0;
+//    
+//}
+
+//Find a number greater than min and smallest of all from the rest and is further behind.
+//-(int) solution:(NSArray*)a {
+//    for (int i=0; i<[a count]; i++) {
+//        NSNumber *min = a[i];
+//        for (int j=1; j<[a count]; j++) {
+//            NSNumber *max = a[[a count]-j];
+//            if (min < max) {
+//                NSPredicate *valuePredicate=[NSPredicate predicateWithFormat:@"self.intValue > %d && self.intValue < %d",[min intValue], [max intValue]];
+//                if ([[a filteredArrayUsingPredicate:valuePredicate] count]==0) {
+//                    // FOUND
+//                    NSLog(@"Greatest value is %d",(int)[a count]-j);
+//                    return (int)[a count]-j;
+//                }
+//            } else {
+//                NSPredicate *valuePredicate=[NSPredicate predicateWithFormat:@"self.intValue < %d && self.intValue > %d",[min intValue], [max intValue]];
+//                if ([[a filteredArrayUsingPredicate:valuePredicate] count]==0) {
+//                    NSLog(@"Greatest value is %d",(int)[a count]-j);
+//                    return (int)[a count]-j;
+//                }
+//            }
+//        }
+//
+//    }
+//    return 0;
+//}
+
 
 @end

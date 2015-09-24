@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LetsRollViewController.h
 //  Letsroll
 //
 //  Created by Neha Mittal on 9/2/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface LetsRollViewController : UIViewController
 
 
 @end
