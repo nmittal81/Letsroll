@@ -84,7 +84,7 @@ static NSString *reusableCell = @"TravelerCell";
     
     UIAlertAction *addNewPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add a new packing list for fellow traveler", @"Add new list") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Let's get started" message:@"Please enter your name" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Let's get started" message:@"Please enter traveler's name" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction
                                    actionWithTitle:NSLocalizedString(@"OK", @"OK action")
                                    style:UIAlertActionStyleDefault
@@ -95,9 +95,20 @@ static NSString *reusableCell = @"TravelerCell";
                                    }];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
          {
-             textField.placeholder = NSLocalizedString(@"LoginPlaceholder", @"Login");
+             textField.placeholder = NSLocalizedString(@"Name", @"Login");
          }];
         [alertController addAction:okAction];
+        
+        UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       [self dismissViewControllerAnimated:true completion:nil];
+                                   }];
+
+        [alertController addAction:cancelAction];
+        
         [self.parentViewController presentViewController:alertController animated:YES completion:nil];
         
         

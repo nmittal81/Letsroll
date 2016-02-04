@@ -354,10 +354,6 @@ static NSString *newItemCell = @"NewItem";
     
     localNotification.fireDate = date;
     
-#ifdef DEBUG
-    NSLog(alertBody);
-#endif
-    
     localNotification.alertBody = alertBody;
     localNotification.alertAction = @"Let's check";
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
