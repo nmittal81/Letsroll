@@ -14,6 +14,7 @@
 #import "BasicUtility.h"
 
 static NSString *reusableCell = @"TravelerCell";
+static NSString *ShowPackingList = @"ShowIndividualPackingList";
 
 @interface MultipleListTableViewController ()
 
@@ -26,13 +27,8 @@ static NSString *reusableCell = @"TravelerCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewPackingList)];
-    NSArray *actionButtonItems = @[addItem];
+
+    NSArray *actionButtonItems = @[self.addItem];
     self.navigationItem.rightBarButtonItems = actionButtonItems;
     NSString *travelDestination = self.travelInfo.destination;
     NSRange range = [travelDestination rangeOfString:@","];
@@ -78,90 +74,19 @@ static NSString *reusableCell = @"TravelerCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (void) addNewPackingList {
-    
-    UIAlertController *addOptionsAlertController = [UIAlertController alertControllerWithTitle:@"Would you like to:" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *addNewPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add a new packing list for fellow traveler", @"Add new list") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Let's get started" message:@"Please enter traveler's name" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action)
-                                   {
-                                       UITextField *t = [alertController.textFields objectAtIndex:0];
-                                       [self addNewListFor:t.text];
-                                   }];
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
-         {
-             textField.placeholder = NSLocalizedString(@"Name", @"Login");
-         }];
-        [alertController addAction:okAction];
-        
-        UIAlertAction *cancelAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action)
-                                   {
-                                       [self dismissViewControllerAnimated:true completion:nil];
-                                   }];
-
-        [alertController addAction:cancelAction];
-        
-        [self.parentViewController presentViewController:alertController animated:YES completion:nil];
-        
-        
-    }];
-    [addOptionsAlertController addAction:addNewPackingList];
-    
-    if (![self.resultsForUserArray containsObject:kitchenList]) {
-        
-        UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            [self addNewListFor:kitchenList];
-            
-        }];
-        [addOptionsAlertController addAction:addKitchenPackingList];
-    }
-    
-    if (![self.resultsForUserArray containsObject:misc]) {
-        UIAlertAction *addMiscPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for some last minute things to do?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            [self addNewListFor:misc];
-            
-        }];
-        [addOptionsAlertController addAction:addMiscPackingList];
-    }
-    
-    if (![self.resultsForUserArray containsObject:destination]) {
-        UIAlertAction *addDestPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for stuff to buy when you reach your destination?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            
-            [self addNewListFor:destination];
-            
-        }];
-        [addOptionsAlertController addAction:addDestPackingList];
-    }
-    
-    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"No Thanks" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
-    [addOptionsAlertController addAction:doneAction];
-    
-    [self presentViewController:addOptionsAlertController animated:YES completion:nil];
-    
-}
-
 - (void) addNewListFor:(NSString*)user {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:travelerEntity inManagedObjectContext:context];
     travelerInfo.travelInfo = self.travelInfo;
     travelerInfo.user = user;
-    [self.resultsForUserArray addObject:user];
     NSError *error;
     if([context save:&error]) {
         self.selectedTravelInfo = travelerInfo;
-        [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
+        [self performSegueWithIdentifier:ShowPackingList sender:self];
     }
+    [self.resultsForUserArray addObject:user];
+    
 }
 
 #pragma mark - Table view data source
@@ -252,7 +177,7 @@ static NSString *reusableCell = @"TravelerCell";
     if ([self.resultsForTravelArray count] > 0) {
         self.selectedTravelInfo = [self.resultsForTravelArray objectAtIndex:indexPath.row];
         
-        [self performSegueWithIdentifier:@"ShowIndividualPackingList" sender:self];
+        [self performSegueWithIdentifier:ShowPackingList sender:self];
     }
 }
 
@@ -263,7 +188,7 @@ static NSString *reusableCell = @"TravelerCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"ShowIndividualPackingList"]) {
+    if ([segue.identifier isEqualToString:ShowPackingList]) {
         PackingListTableViewController *vc = (PackingListTableViewController*) segue.destinationViewController;
         vc.travelerInfo = self.selectedTravelInfo;
         vc.resultsForUserArray = self.resultsForUserArray;

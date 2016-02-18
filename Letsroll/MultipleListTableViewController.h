@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonTableViewController.h"
 
 @class TravelInfo;
 
-@interface MultipleListTableViewController : UITableViewController
+@interface MultipleListTableViewController : CommonTableViewController
 
 @property (nonatomic, strong) TravelInfo *travelInfo;
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		475BBD125FDA1BA5EC4D2355 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B666649C08DEC184FBED99B /* libPods.a */; };
+		7C10ED571C66DBCF0096E347 /* CommonTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C10ED561C66DBCF0096E347 /* CommonTableViewController.m */; };
 		7C1B1C511B972F950037EE69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B1C501B972F950037EE69 /* main.m */; };
 		7C1B1C541B972F950037EE69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B1C531B972F950037EE69 /* AppDelegate.m */; };
 		7C1B1C571B972F950037EE69 /* Letsroll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B1C551B972F950037EE69 /* Letsroll.xcdatamodeld */; };
@@ -16,22 +17,22 @@
 		7C1B1C5F1B972F950037EE69 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C1B1C5E1B972F950037EE69 /* Images.xcassets */; };
 		7C1B1C621B972F950037EE69 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1B1C601B972F950037EE69 /* LaunchScreen.xib */; };
 		7C1B1C6E1B972F950037EE69 /* LetsrollTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B1C6D1B972F950037EE69 /* LetsrollTests.m */; };
-		7C2630AD1BA37D2B003A05AE /* SavedTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2630AC1BA37D2B003A05AE /* SavedTripsTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		7C2C650F1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C650C1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		7C2C65101BA0821C005693BA /* TravelerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C650E1BA0821C005693BA /* TravelerInfo.m */; settings = {ASSET_TAGS = (); }; };
-		7C3BC7311BA0BB8400D54F23 /* MultipleList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3BC7301BA0BB8400D54F23 /* MultipleList.storyboard */; settings = {ASSET_TAGS = (); }; };
-		7C3BC73E1BA1C6D100D54F23 /* MultipleListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC73D1BA1C6D100D54F23 /* MultipleListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
-		7CA40FA01BA1ECC7005EDE3A /* ReminderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA40F9F1BA1ECC7005EDE3A /* ReminderTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		7CA7CBA91B98CC77001BD0B6 /* SavedTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
-		7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAB1B98D1F3001BD0B6 /* PackingListTableViewController.m */; settings = {ASSET_TAGS = (); }; };
-		7CA7CBAE1B98D5EE001BD0B6 /* Trips.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAD1B98D5EE001BD0B6 /* Trips.storyboard */; settings = {ASSET_TAGS = (); }; };
-		7CA7CBB31B9B43BA001BD0B6 /* PackingItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBB21B9B43BA001BD0B6 /* PackingItemTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		7CA7CBB61B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBB51B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		7CA7CBCE1B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBC71B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		7CA7CBCF1B9DCB57001BD0B6 /* PackingList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBC91B9DCB57001BD0B6 /* PackingList.m */; settings = {ASSET_TAGS = (); }; };
-		7CA7CBD01B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBCB1B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		7CA7CBD11B9DCB57001BD0B6 /* TravelInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBCD1B9DCB57001BD0B6 /* TravelInfo.m */; settings = {ASSET_TAGS = (); }; };
-		7CF16B751B977CAA007D58C2 /* Packing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CF16B741B977CAA007D58C2 /* Packing.storyboard */; settings = {ASSET_TAGS = (); }; };
+		7C2630AD1BA37D2B003A05AE /* SavedTripsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2630AC1BA37D2B003A05AE /* SavedTripsTableViewCell.m */; };
+		7C2C650F1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C650C1BA0821C005693BA /* TravelerInfo+CoreDataProperties.m */; };
+		7C2C65101BA0821C005693BA /* TravelerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2C650E1BA0821C005693BA /* TravelerInfo.m */; };
+		7C3BC7311BA0BB8400D54F23 /* MultipleList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C3BC7301BA0BB8400D54F23 /* MultipleList.storyboard */; };
+		7C3BC73E1BA1C6D100D54F23 /* MultipleListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3BC73D1BA1C6D100D54F23 /* MultipleListTableViewController.m */; };
+		7CA40FA01BA1ECC7005EDE3A /* ReminderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA40F9F1BA1ECC7005EDE3A /* ReminderTableViewCell.m */; };
+		7CA7CBA91B98CC77001BD0B6 /* SavedTripsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBA81B98CC77001BD0B6 /* SavedTripsTableViewController.m */; };
+		7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAB1B98D1F3001BD0B6 /* PackingListTableViewController.m */; };
+		7CA7CBAE1B98D5EE001BD0B6 /* Trips.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA7CBAD1B98D5EE001BD0B6 /* Trips.storyboard */; };
+		7CA7CBB31B9B43BA001BD0B6 /* PackingItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBB21B9B43BA001BD0B6 /* PackingItemTableViewCell.m */; };
+		7CA7CBB61B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBB51B9B43C8001BD0B6 /* NewPackingItemTableViewCell.m */; };
+		7CA7CBCE1B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBC71B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m */; };
+		7CA7CBCF1B9DCB57001BD0B6 /* PackingList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBC91B9DCB57001BD0B6 /* PackingList.m */; };
+		7CA7CBD01B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBCB1B9DCB57001BD0B6 /* TravelInfo+CoreDataProperties.m */; };
+		7CA7CBD11B9DCB57001BD0B6 /* TravelInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7CBCD1B9DCB57001BD0B6 /* TravelInfo.m */; };
+		7CF16B751B977CAA007D58C2 /* Packing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CF16B741B977CAA007D58C2 /* Packing.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		06BB0534B280B586EF4EBB1B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		1E1533BC8226AA366C85003D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3B666649C08DEC184FBED99B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C10ED551C66DBCF0096E347 /* CommonTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTableViewController.h; sourceTree = "<group>"; };
+		7C10ED561C66DBCF0096E347 /* CommonTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonTableViewController.m; sourceTree = "<group>"; };
 		7C1B1C4B1B972F950037EE69 /* Letsroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Letsroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1B1C4F1B972F950037EE69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C1B1C501B972F950037EE69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -121,6 +124,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7C10ED541C66DBB20096E347 /* CommonTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				7C10ED551C66DBCF0096E347 /* CommonTableViewController.h */,
+				7C10ED561C66DBCF0096E347 /* CommonTableViewController.m */,
+			);
+			name = CommonTableViewController;
+			sourceTree = "<group>";
+		};
 		7C1B1C421B972F950037EE69 = {
 			isa = PBXGroup;
 			children = (
@@ -144,11 +156,12 @@
 		7C1B1C4D1B972F950037EE69 /* Letsroll */ = {
 			isa = PBXGroup;
 			children = (
+				7C10ED541C66DBB20096E347 /* CommonTableViewController */,
 				7C3BC7351BA0BBB600D54F23 /* SavedTrips */,
+				7CA7CBB01B9B4395001BD0B6 /* PackingList */,
 				7C3BC72F1BA0BB6B00D54F23 /* MultipleListView */,
 				7C3BC72E1BA0BB2400D54F23 /* Model */,
 				7C3BC72D1BA0BB1500D54F23 /* App main */,
-				7CA7CBB01B9B4395001BD0B6 /* PackingList */,
 				7C1B1C5E1B972F950037EE69 /* Images.xcassets */,
 				7C1B1C601B972F950037EE69 /* LaunchScreen.xib */,
 				7C1B1C4E1B972F950037EE69 /* Supporting Files */,
@@ -416,6 +429,7 @@
 				7CA7CBB31B9B43BA001BD0B6 /* PackingItemTableViewCell.m in Sources */,
 				7CA40FA01BA1ECC7005EDE3A /* ReminderTableViewCell.m in Sources */,
 				7C3BC73E1BA1C6D100D54F23 /* MultipleListTableViewController.m in Sources */,
+				7C10ED571C66DBCF0096E347 /* CommonTableViewController.m in Sources */,
 				7CA7CBAC1B98D1F3001BD0B6 /* PackingListTableViewController.m in Sources */,
 				7CA7CBCE1B9DCB57001BD0B6 /* PackingList+CoreDataProperties.m in Sources */,
 				7CA7CBA91B98CC77001BD0B6 /* SavedTripsTableViewController.m in Sources */,
@@ -551,7 +565,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Letsroll/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Letsroll.Letsroll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -567,7 +581,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Letsroll/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Letsroll.Letsroll;
 				PRODUCT_NAME = "$(TARGET_NAME)";

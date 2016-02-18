@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Letsroll/PackingListTableViewController.m"
-            timestampString = "463936463.913304"
+            timestampString = "476503535.140101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "-dateSelected"
             landmarkType = "5">
          </BreakpointContent>
@@ -142,28 +142,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Letsroll/MultipleListTableViewController.m"
-            timestampString = "476318981.731326"
+            timestampString = "476504354.211918"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "-tableView:numberOfRowsInSection:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Letsroll/PackingListTableViewController.m"
-            timestampString = "463851682.549648"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-updateView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -212,22 +196,6 @@
             startingLineNumber = "215"
             endingLineNumber = "215"
             landmarkName = "-setUpStandardCellInTable:WithIdentifier:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Letsroll/PackingListTableViewController.m"
-            timestampString = "476318844.065063"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-addNewPackingList"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

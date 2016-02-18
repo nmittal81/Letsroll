@@ -42,12 +42,7 @@ static NSString *newItemCell = @"NewItem";
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateStyle:NSDateFormatterLongStyle];
     
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewPackingList)];
-    UIBarButtonItem * importItem = [[UIBarButtonItem alloc] initWithTitle:@"Import" style:UIBarButtonItemStylePlain target:self action:@selector(updateViewWithAllItemsForTraveler)];
-    
-    NSArray *actionButtonItems = @[addItem, importItem];
+    NSArray *actionButtonItems = @[self.addItem, self.importItem];
     self.navigationItem.rightBarButtonItems = actionButtonItems;
     [self updateView];
 }
@@ -79,69 +74,6 @@ static NSString *newItemCell = @"NewItem";
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf.tableView reloadData];
     });
-}
-
-- (void) addNewPackingList {
-   
-    UIAlertController *addOptionsAlertController = [UIAlertController alertControllerWithTitle:@"Would you like to:" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *addNewPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add a new packing list for fellow traveler", @"Add new list") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Let's get started" message:@"Please enter your name" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"OK", @"OK action")
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action)
-                                   {
-                                       
-                                       UITextField *t = [alertController.textFields objectAtIndex:0];
-                                       [self addNewListFor:t.text];
-                                   }];
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
-         {
-             textField.placeholder = NSLocalizedString(@"LoginPlaceholder", @"Login");
-         }];
-        [alertController addAction:okAction];
-        [self.parentViewController presentViewController:alertController animated:YES completion:nil];
-        
-        
-    }];
-    [addOptionsAlertController addAction:addNewPackingList];
-    
-    if (![self.resultsForUserArray containsObject:kitchenList]) {
-    
-        UIAlertAction *addKitchenPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want to pack some kitchen supplies", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            [self addNewListFor:kitchenList];
-            
-        }];
-        [addOptionsAlertController addAction:addKitchenPackingList];
-    }
-    
-    if (![self.resultsForUserArray containsObject:misc]) {
-        UIAlertAction *addMiscPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for some last minute things to do?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            
-            [self addNewListFor:misc];
-            
-        }];
-        [addOptionsAlertController addAction:addMiscPackingList];
-    }
-    
-    if (![self.resultsForUserArray containsObject:destination]) {
-        UIAlertAction *addDestPackingList = [UIAlertAction actionWithTitle:NSLocalizedString(@"Want a reminder for stuff to buy when you reach your destination?", @"Kitchen supplies") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-            
-            [self addNewListFor:destination];
-            
-        }];
-        [addOptionsAlertController addAction:addDestPackingList];
-    }
-    
-    UIAlertAction *doneAction = [UIAlertAction actionWithTitle:@"No Thanks" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }];
-    [addOptionsAlertController addAction:doneAction];
-    
-    [self presentViewController:addOptionsAlertController animated:YES completion:nil];
-    
 }
 
 - (void) addNewListFor:(NSString*)user {

@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonTableViewController.h"
 
 @class TravelerInfo;
 
-@interface PackingListTableViewController : UITableViewController
-
+@interface PackingListTableViewController : CommonTableViewController
 @property (nonatomic, strong) TravelerInfo *travelerInfo;
-@property (nonatomic, strong) NSString *userInfo;
-@property (nonatomic, strong) NSArray *resultsForUserArray;
 
 @end
