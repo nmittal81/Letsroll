@@ -288,6 +288,7 @@
 				7C1B1C481B972F950037EE69 /* Frameworks */,
 				7C1B1C491B972F950037EE69 /* Resources */,
 				59D4771A476A51DEA29F1850 /* Copy Pods Resources */,
+				E0557580E4B2BCBADDA32ED8 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -327,7 +328,7 @@
 				TargetAttributes = {
 					7C1B1C4A1B972F950037EE69 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = SZ6JZZKY4L;
+						DevelopmentTeam = 3VZU668FPC;
 					};
 					7C1B1C661B972F950037EE69 = {
 						CreatedOnToolsVersion = 6.4;
@@ -406,6 +407,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E0557580E4B2BCBADDA32ED8 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -567,7 +583,7 @@
 				INFOPLIST_FILE = Letsroll/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Letsroll.Letsroll;
+				PRODUCT_BUNDLE_IDENTIFIER = com.letsroll.letsroll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -583,7 +599,7 @@
 				INFOPLIST_FILE = Letsroll/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Letsroll.Letsroll;
+				PRODUCT_BUNDLE_IDENTIFIER = com.letsroll.letsroll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

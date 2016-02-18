@@ -1,10 +1,10 @@
 PODS:
-  - ActionSheetPicker-3.0 (1.7.2)
+  - ActionSheetPicker-3.0 (2.0.5)
 
 DEPENDENCIES:
-  - ActionSheetPicker-3.0 (~> 1.7.2)
+  - ActionSheetPicker-3.0 (~> 2.0.5)
 
 SPEC CHECKSUMS:
-  ActionSheetPicker-3.0: c5bdca19fd8b3d798f0c79892cbab6f11a8523ae
+  ActionSheetPicker-3.0: 8312778b6815578e6a86d630fbcf31dc94c534e7
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0
