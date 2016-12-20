@@ -123,7 +123,7 @@ static NSString *userFromUserDefaults = @"userName";
     [self.view addSubview: self.activityIndicatorView];
     
     [self.activityIndicatorView startAnimating];
-    NSString *searchQuery =  [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&type=regions&key=%@", self.citySelectorTextField.text,GOOGLE_PLACE_API_KEY];
+    NSString *searchQuery =  [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&key=%@", self.citySelectorTextField.text,GOOGLE_PLACE_API_KEY];
     
     searchQuery = [searchQuery stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     

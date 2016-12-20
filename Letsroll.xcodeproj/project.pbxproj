@@ -328,7 +328,8 @@
 				TargetAttributes = {
 					7C1B1C4A1B972F950037EE69 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 3VZU668FPC;
+						DevelopmentTeam = SZ6JZZKY4L;
+						LastSwiftMigration = 0810;
 					};
 					7C1B1C661B972F950037EE69 = {
 						CreatedOnToolsVersion = 6.4;
@@ -583,9 +584,10 @@
 				INFOPLIST_FILE = Letsroll/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.letsroll.letsroll;
+				PRODUCT_BUNDLE_IDENTIFIER = com.userletsroll.letsroll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -599,9 +601,10 @@
 				INFOPLIST_FILE = Letsroll/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.letsroll.letsroll;
+				PRODUCT_BUNDLE_IDENTIFIER = com.userletsroll.letsroll;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
