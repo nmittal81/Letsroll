@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8193.2" systemVersion="14F27" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="PackingList" representedClassName="PackingList" syncable="YES">
-        <attribute name="isPacked" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isPacked" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="travelerInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelerInfo" syncable="YES"/>
     </entity>
     <entity name="TravelerInfo" representedClassName="TravelerInfo" syncable="YES">
-        <attribute name="reminderDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="reminderDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="travelInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" syncable="YES"/>
     </entity>
@@ -15,8 +15,8 @@
         <attribute name="travelDate" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PackingList" positionX="-513" positionY="-0" width="128" height="90"/>
-        <element name="TravelerInfo" positionX="-333" positionY="36" width="128" height="90"/>
-        <element name="TravelInfo" positionX="-209" positionY="-36" width="128" height="75"/>
+        <element name="PackingList" positionX="-513" positionY="-0" width="128" height="88"/>
+        <element name="TravelerInfo" positionX="-333" positionY="36" width="128" height="88"/>
+        <element name="TravelInfo" positionX="-99" positionY="38" width="128" height="73"/>
     </elements>
 </model>

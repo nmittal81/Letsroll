@@ -94,7 +94,7 @@ static NSString *const kActionTarget  = @"buttonActionTarget";
 - (void)notifyTarget:(id)target didCancelWithAction:(SEL)cancelAction origin:(id)origin;
 
     // For subclasses.  This returns a configured picker view.  Subclasses should autorelease.
-- (UIView *)configuredPickerView;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) UIView *configuredPickerView;
 
     // Adds custom buttons to the left of the UIToolbar that select specified values
 - (void)addCustomButtonWithTitle:(NSString *)title value:(id)value;

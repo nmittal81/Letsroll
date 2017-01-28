@@ -75,7 +75,7 @@
 - (void)didMoveToWindow
 {
     // exit if view is removed from the window or there are no labels.
-    if ( !self.window || [labels count] == 0 )
+    if ( !self.window || labels.count == 0 )
         return;
 
     UIFont *labelfont = [UIFont boldSystemFontOfSize:20];
@@ -166,14 +166,14 @@
                     // if this is the last wheel, add label as the third view from the top
                     if ( component == self.numberOfComponents - 1 ) if ( NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1)
                     {
-                        UIView *o = [self.subviews[0] subviews][[[self.subviews[0] subviews] count] - 1];
-                        UIView *subview = [o subviews][2];
-                        UIView *view = [(subview.subviews)[0] subviews][1];
+                        UIView *o = (self.subviews[0]).subviews[(self.subviews[0]).subviews.count - 1];
+                        UIView *subview = o.subviews[2];
+                        UIView *view = ((subview.subviews)[0]).subviews[1];
                         [self insertSubview:label aboveSubview:view];
                     }
                     else
                     {
-                        [self insertSubview:label atIndex:[self.subviews count] - 3];
+                        [self insertSubview:label atIndex:(self.subviews).count - 3];
                     }
                             // otherwise add label as the 5th, 10th, 15th etc view from the top
                     else
@@ -181,7 +181,7 @@
                         if ( NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1)
                         {
                             [self insertSubview:label
-                                   aboveSubview:[self.subviews[0] subviews][(NSUInteger) component]];
+                                   aboveSubview:(self.subviews[0]).subviews[(NSUInteger) component]];
                         }
                         else
                         {

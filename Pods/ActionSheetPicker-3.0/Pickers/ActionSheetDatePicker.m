@@ -57,8 +57,8 @@
               minimumDate:(NSDate *)minimumDate maximumDate:(NSDate *)maximumDate
                    target:(id)target action:(SEL)action origin:(id)origin {
     ActionSheetDatePicker *picker = [[ActionSheetDatePicker alloc] initWithTitle:title datePickerMode:datePickerMode selectedDate:selectedDate target:target action:action origin:origin];
-    [picker setMinimumDate:minimumDate];
-    [picker setMaximumDate:maximumDate];
+    picker.minimumDate = minimumDate;
+    picker.maximumDate = maximumDate;
     [picker showActionSheetPicker];
     return picker;
 }
@@ -95,13 +95,13 @@
                                                                        doneBlock:doneBlock
                                                                      cancelBlock:cancelBlock
                                                                           origin:view];
-    [picker setMinimumDate:minimumDate];
-    [picker setMaximumDate:maximumDate];
+    picker.minimumDate = minimumDate;
+    picker.maximumDate = maximumDate;
     [picker showActionSheetPicker];
     return picker;
 }
 
-- (id)initWithTitle:(NSString *)title datePickerMode:(UIDatePickerMode)datePickerMode selectedDate:(NSDate *)selectedDate target:(id)target action:(SEL)action origin:(id)origin
+- (instancetype)initWithTitle:(NSString *)title datePickerMode:(UIDatePickerMode)datePickerMode selectedDate:(NSDate *)selectedDate target:(id)target action:(SEL)action origin:(id)origin
 {
     self = [self initWithTitle:title datePickerMode:datePickerMode selectedDate:selectedDate target:target action:action origin:origin cancelAction:nil];
     return self;

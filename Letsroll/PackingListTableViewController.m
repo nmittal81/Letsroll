@@ -54,7 +54,7 @@ static NSString *newItemCell = @"NewItem";
 
 - (void) updateView {
     self.navigationItem.title = [self.travelerInfo.user capitalizedString];
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:packingEntity];
@@ -77,7 +77,7 @@ static NSString *newItemCell = @"NewItem";
 }
 
 - (void) addNewListFor:(NSString*)user {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:travelerEntity inManagedObjectContext:context];
     travelerInfo.travelInfo = self.travelerInfo.travelInfo;
@@ -149,7 +149,7 @@ static NSString *newItemCell = @"NewItem";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         //Do some thing here
-        AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+        AppDelegate *appdelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         NSManagedObjectContext *context = appdelegate.managedObjectContext;
         NSManagedObject *obj = [self.packingListArray objectAtIndex:indexPath.row];
         [context deleteObject:obj];
@@ -194,7 +194,7 @@ static NSString *newItemCell = @"NewItem";
 #pragma mark NewPackingItemTableViewCellDelegate methods
 -(void)newItemAddedToPack:(NSString*)name {
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     PackingList *packingItem;
@@ -221,7 +221,7 @@ static NSString *newItemCell = @"NewItem";
 
 #pragma mark PackingItemTableViewCellDelegate
 -(void) itemPackChangeStatus:(NSUInteger)index {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     PackingList *packingItem = [self.packingListArray objectAtIndex:index];
@@ -251,7 +251,7 @@ static NSString *newItemCell = @"NewItem";
     
     UIDatePicker *datePicker = (UIDatePicker*)self.datePicker.configuredPickerView;
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     self.travelerInfo.reminderDate = datePicker.date;
@@ -297,7 +297,7 @@ static NSString *newItemCell = @"NewItem";
 
 -(void) updateViewWithAllItemsForTraveler {
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];

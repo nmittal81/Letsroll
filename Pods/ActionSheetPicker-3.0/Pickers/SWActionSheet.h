@@ -13,7 +13,7 @@
 
 - (void)showFromBarButtonItem:(UIBarButtonItem *)item animated:(BOOL)animated;
 
-- (instancetype)initWithView:(UIView *)view;
+- (instancetype)initWithView:(UIView *)view NS_DESIGNATED_INITIALIZER;
 
 - (void)showInContainerView;
 @end

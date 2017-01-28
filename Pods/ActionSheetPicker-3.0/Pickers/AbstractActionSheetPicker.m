@@ -34,7 +34,7 @@ CG_INLINE BOOL isIPhone4() {
     struct utsname systemInfo;
     uname(&systemInfo);
 
-    NSString *modelName = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    NSString *modelName = @(systemInfo.machine);
     return ([modelName rangeOfString:@"iPhone3"].location != NSNotFound);
 }
 
@@ -152,8 +152,8 @@ CG_INLINE BOOL isIPhone4() {
         UIBarButtonItem *sysCancelButton = [self createButtonWithType:UIBarButtonSystemItemCancel target:self
                                                                action:@selector(actionPickerCancel:)];
 
-        [self setCancelBarButtonItem:sysCancelButton];
-        [self setDoneBarButtonItem:sysDoneButton];
+        self.cancelBarButtonItem = sysCancelButton;
+        self.doneBarButtonItem = sysDoneButton;
 
         self.tapDismissAction = TapActionNone;
         //allows us to use this without needing to store a reference in calling class
@@ -421,8 +421,8 @@ CG_INLINE BOOL isIPhone4() {
         [uiButton addTarget:self action:@selector(actionPickerCancel:) forControlEvents:UIControlEventTouchUpInside];
     }
     else {
-        [button setTarget:self];
-        [button setAction:@selector(actionPickerCancel:)];
+        button.target = self;
+        button.action = @selector(actionPickerCancel:);
     }
     self.cancelBarButtonItem = button;
 }
@@ -431,15 +431,15 @@ CG_INLINE BOOL isIPhone4() {
 - (void)setDoneButton:(UIBarButtonItem *)button {
     if ([button.customView isKindOfClass:[UIButton class]]) {
         UIButton *uiButton = (UIButton *) button.customView;
-        [button setAction:@selector(actionPickerDone:)];
+        button.action = @selector(actionPickerDone:);
         [uiButton addTarget:self action:@selector(actionPickerDone:) forControlEvents:UIControlEventTouchUpInside];
     }
     else {
-        [button setTarget:self];
-        [button setAction:@selector(actionPickerDone:)];
+        button.target = self;
+        button.action = @selector(actionPickerDone:);
     }
-    [button setTarget:self];
-    [button setAction:@selector(actionPickerDone:)];
+    button.target = self;
+    button.action = @selector(actionPickerDone:);
     self.doneBarButtonItem = button;
 }
 
@@ -501,8 +501,8 @@ CG_INLINE BOOL isIPhone4() {
                              titleTextAttributes:(NSDictionary *)titleTextAttributes
                               andAttributedTitle:(NSAttributedString *)attributedTitle {
     UILabel *toolBarItemLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 180, 30)];
-    [toolBarItemLabel setTextAlignment:NSTextAlignmentCenter];
-    [toolBarItemLabel setBackgroundColor:[UIColor clearColor]];
+    toolBarItemLabel.textAlignment = NSTextAlignmentCenter;
+    toolBarItemLabel.backgroundColor = [UIColor clearColor];
 
     CGFloat strikeWidth;
     CGSize textSize;
@@ -516,19 +516,19 @@ CG_INLINE BOOL isIPhone4() {
         textSize = toolBarItemLabel.attributedText.size;
     }
     else {
-        [toolBarItemLabel setTextColor:(NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) ? [UIColor blackColor] : [UIColor whiteColor]];
-        [toolBarItemLabel setFont:[UIFont boldSystemFontOfSize:16]];
+        toolBarItemLabel.textColor = (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) ? [UIColor blackColor] : [UIColor whiteColor];
+        toolBarItemLabel.font = [UIFont boldSystemFontOfSize:16];
         toolBarItemLabel.text = aTitle;
 
         if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnavailableInDeploymentTarget"
-            textSize = [[toolBarItemLabel text] sizeWithAttributes:@{NSFontAttributeName : [toolBarItemLabel font]}];
+            textSize = [toolBarItemLabel.text sizeWithAttributes:@{NSFontAttributeName : toolBarItemLabel.font}];
 #pragma clang diagnostic pop
         } else {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-            textSize = [[toolBarItemLabel text] sizeWithFont:[toolBarItemLabel font]];
+            textSize = [toolBarItemLabel.text sizeWithFont:toolBarItemLabel.font];
 #pragma clang diagnostic pop
         }
     }
@@ -575,7 +575,7 @@ CG_INLINE BOOL isIPhone4() {
 
     } else {
         //iOS 8 or later
-        return [[UIScreen mainScreen] bounds].size;
+        return [UIScreen mainScreen].bounds.size;
     }
 #else
     if ( [self isViewPortrait] )
@@ -665,7 +665,7 @@ CG_INLINE BOOL isIPhone4() {
         self.popOverController.backgroundColor = self.pickerBackgroundColor;
     }
     if (self.popoverBackgroundViewClass) {
-        [self.popOverController setPopoverBackgroundViewClass:self.popoverBackgroundViewClass];
+        (self.popOverController).popoverBackgroundViewClass = self.popoverBackgroundViewClass;
     }
 
     [self presentPopover:_popOverController];
@@ -703,7 +703,7 @@ CG_INLINE BOOL isIPhone4() {
         });
     }
     @catch (NSException *exception) {
-        origin = [[[[UIApplication sharedApplication] keyWindow] rootViewController] view];
+        origin = [UIApplication sharedApplication].keyWindow.rootViewController.view;
         presentRect = CGRectMake(origin.center.x, origin.center.y, 1, 1);
         dispatch_async(dispatch_get_main_queue(), ^{
             [popover presentPopoverFromRect:presentRect inView:origin

@@ -51,7 +51,7 @@
                                    handler:^(UIAlertAction *action)
                                    {
                                        
-                                       UITextField *t = [alertController.textFields objectAtIndex:0];
+                                       UITextField *t = (alertController.textFields)[0];
                                        [self addNewListFor:t.text];
                                    }];
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)

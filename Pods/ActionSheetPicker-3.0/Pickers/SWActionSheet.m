@@ -71,7 +71,7 @@ static const enum UIViewAnimationOptions options = UIViewAnimationOptionCurveEas
     {
         [self actionSheetContainer].actionSheet = nil;
         SWActionSheetWindow.hidden = YES;
-        if ([SWActionSheetWindow isKeyWindow])
+        if (SWActionSheetWindow.keyWindow)
             [SWActionSheetWindow resignFirstResponder];
         SWActionSheetWindow.rootViewController = nil;
         SWActionSheetWindow = nil;
@@ -98,7 +98,7 @@ static const enum UIViewAnimationOptions options = UIViewAnimationOptionCurveEas
 
 - (SWActionSheetVC *)actionSheetContainer
 {
-    return (SWActionSheetVC *) [self window].rootViewController;
+    return (SWActionSheetVC *) self.window.rootViewController;
 }
 
 - (instancetype)initWithView:(UIView *)aView
@@ -132,8 +132,8 @@ static const enum UIViewAnimationOptions options = UIViewAnimationOptionCurveEas
 - (void)showInContainerView
 {
     // Make sheet window visible and active
-    UIWindow *sheetWindow = [self window];
-    if (![sheetWindow isKeyWindow])
+    UIWindow *sheetWindow = self.window;
+    if (!sheetWindow.keyWindow)
         [sheetWindow makeKeyAndVisible];
     sheetWindow.hidden = NO;
     // Put our ActionSheet in Container (it will be presented as soon as possible)
@@ -193,7 +193,7 @@ static const enum UIViewAnimationOptions options = UIViewAnimationOptionCurveEas
 - (void)presentActionSheetAnimated:(BOOL)animated
 {
     // New action sheet will be presented only when view controller will be loaded
-    if (_actionSheet && [self isViewLoaded] && !_actionSheet.presented)
+    if (_actionSheet && self.viewLoaded && !_actionSheet.presented)
     {
         [_actionSheet configureFrameForBounds:self.view.bounds];
         _actionSheet.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

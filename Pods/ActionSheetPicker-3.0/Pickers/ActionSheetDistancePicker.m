@@ -57,8 +57,8 @@
         self.smallUnitString = smallUnitString;
         self.smallUnitMax = smallUnitMax;
         self.selectedSmallUnit = selectedSmallUnit;
-        self.bigUnitDigits = [[NSString stringWithFormat:@"%li", (long)self.bigUnitMax] length];
-        self.smallUnitDigits = [[NSString stringWithFormat:@"%li", (long)self.smallUnitMax] length];
+        self.bigUnitDigits = [NSString stringWithFormat:@"%li", (long)self.bigUnitMax].length;
+        self.smallUnitDigits = [NSString stringWithFormat:@"%li", (long)self.smallUnitMax].length;
     }
     return self;
 }
@@ -81,8 +81,8 @@
         self.smallUnitString = smallUnitString;
         self.smallUnitMax = smallUnitMax;
         self.selectedSmallUnit = selectedSmallUnit;
-        self.bigUnitDigits = [[NSString stringWithFormat:@"%li", (long)self.bigUnitMax] length];
-        self.smallUnitDigits = [[NSString stringWithFormat:@"%li", (long)self.smallUnitMax] length];
+        self.bigUnitDigits = [NSString stringWithFormat:@"%li", (long)self.bigUnitMax].length;
+        self.smallUnitDigits = [NSString stringWithFormat:@"%li", (long)self.smallUnitMax].length;
     }
     return self;
 }

@@ -28,9 +28,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObjectContext *context = appDelegate.managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"TravelInfo"];
     
     NSError *error = nil;
@@ -56,7 +56,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.resultsArray count];
+    return (self.resultsArray).count;
 }
 
 
@@ -64,7 +64,7 @@
     SavedTripsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"travelInfo" forIndexPath:indexPath];
     
     // Configure the cell...
-    TravelInfo *travelInfo = [self.resultsArray objectAtIndex:indexPath.row];
+    TravelInfo *travelInfo = (self.resultsArray)[indexPath.row];
     cell.destinationLabel.text = travelInfo.destination;
     cell.dateLabel.text = travelInfo.travelDate;
     
@@ -72,8 +72,8 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.resultsArray count] > 0) {
-        self.selectedTravelInfo = [self.resultsArray objectAtIndex:indexPath.row];
+    if ((self.resultsArray).count > 0) {
+        self.selectedTravelInfo = (self.resultsArray)[indexPath.row];
         [self performSegueWithIdentifier:@"ShowMultipleLists" sender:self];
     }
 }
@@ -99,9 +99,9 @@
                              handler:^(UIAlertAction * action)
                              {
                                  //Do some thing here
-                                 AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+                                 AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
                                  NSManagedObjectContext *context = appdelegate.managedObjectContext;
-                                 NSManagedObject *obj = [self.resultsArray objectAtIndex:indexPath.row];
+                                 NSManagedObject *obj = (self.resultsArray)[indexPath.row];
                                  [context deleteObject:obj];
                                  NSError *error;
                                  if ([context save:&error]) {

@@ -128,7 +128,7 @@
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return [self.data count];
+    return (self.data).count;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
@@ -169,7 +169,7 @@
 
 - (void)performInitialSelectionInPickerView:(UIPickerView *)pickerView {
     for (int i = 0; i < self.selectedIndexes.count; i++) {
-        NSInteger row = [(NSNumber *)self.initialSelection[i] integerValue];
+        NSInteger row = ((NSNumber *)self.initialSelection[i]).integerValue;
         [pickerView selectRow:row inComponent:i animated:NO];
     }
 }
@@ -186,7 +186,7 @@
 - (NSArray *)selectedIndexes {
     NSMutableArray * indexes = [NSMutableArray array];
     for (int i = 0; i < self.data.count; i++) {
-        NSNumber *index = [NSNumber numberWithInteger:[(UIPickerView *)self.pickerView selectedRowInComponent:(NSInteger)i]];
+        NSNumber *index = @([(UIPickerView *)self.pickerView selectedRowInComponent:(NSInteger)i]);
         [indexes addObject: index];
     }
     return [indexes copy];

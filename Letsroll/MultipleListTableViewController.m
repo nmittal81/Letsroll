@@ -20,7 +20,7 @@ static NSString *ShowPackingList = @"ShowIndividualPackingList";
 
 @property (nonatomic, strong) TravelerInfo *selectedTravelInfo;
 @property (nonatomic, strong) NSMutableArray *resultsForTravelArray;
-@property (nonatomic, strong) NSMutableArray *resultsForUserArray;
+@property (nonatomic, strong) NSMutableArray *resultsForUsersArray;
 @end
 
 @implementation MultipleListTableViewController
@@ -50,8 +50,8 @@ static NSString *ShowPackingList = @"ShowIndividualPackingList";
 
 - (void) updateResults {
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    NSManagedObjectContext *context = appDelegate.managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:travelerEntity];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"travelInfo = %@", self.travelInfo];
     request.predicate = predicate;
@@ -75,8 +75,8 @@ static NSString *ShowPackingList = @"ShowIndividualPackingList";
 }
 
 - (void) addNewListFor:(NSString*)user {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    NSManagedObjectContext *context = appDelegate.managedObjectContext;
     TravelerInfo *travelerInfo = [NSEntityDescription insertNewObjectForEntityForName:travelerEntity inManagedObjectContext:context];
     travelerInfo.travelInfo = self.travelInfo;
     travelerInfo.user = user;
@@ -85,7 +85,7 @@ static NSString *ShowPackingList = @"ShowIndividualPackingList";
         self.selectedTravelInfo = travelerInfo;
         [self performSegueWithIdentifier:ShowPackingList sender:self];
     }
-    [self.resultsForUserArray addObject:user];
+    [self.resultsForUsersArray addObject:user];
     
 }
 
@@ -96,7 +96,7 @@ static NSString *ShowPackingList = @"ShowIndividualPackingList";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.resultsForUserArray count];
+    return (self.resultsForUserArray).count;
 }
 
 
@@ -104,7 +104,7 @@ static NSString *ShowPackingList = @"ShowIndividualPackingList";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusableCell forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = [[self.resultsForUserArray objectAtIndex:indexPath.row] capitalizedString];
+    cell.textLabel.text = [(self.resultsForUserArray)[indexPath.row] capitalizedString];
     return cell;
 }
 
@@ -130,9 +130,9 @@ static NSString *ShowPackingList = @"ShowIndividualPackingList";
                              handler:^(UIAlertAction * action)
                              {
                                  //Do some thing here
-                                 AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+                                 AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
                                  NSManagedObjectContext *context = appdelegate.managedObjectContext;
-                                 TravelerInfo *travelerInfo = [self.resultsForTravelArray objectAtIndex:indexPath.row];
+                                 TravelerInfo *travelerInfo = (self.resultsForTravelArray)[indexPath.row];
                                  [context deleteObject:travelerInfo];
                                  NSError *error;
                                  if ([context save:&error]) {
@@ -174,8 +174,8 @@ static NSString *ShowPackingList = @"ShowIndividualPackingList";
 */
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.resultsForTravelArray count] > 0) {
-        self.selectedTravelInfo = [self.resultsForTravelArray objectAtIndex:indexPath.row];
+    if ((self.resultsForTravelArray).count > 0) {
+        self.selectedTravelInfo = (self.resultsForTravelArray)[indexPath.row];
         
         [self performSegueWithIdentifier:ShowPackingList sender:self];
     }

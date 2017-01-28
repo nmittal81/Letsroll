@@ -69,6 +69,12 @@ static NSString *userFromUserDefaults = @"userName";
 //    [self solution:@[@0,@3,@3,@7,@5,@3,@11,@1]];
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.citySelectorTextField.text = @"";
+    self.dateTextField.text = @"";
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -140,7 +146,7 @@ static NSString *userFromUserDefaults = @"userName";
                                                              options:kNilOptions
                                                                error:&error];
         
-        NSArray *tempData = [json objectForKey:@"predictions"];
+        NSArray *tempData = json[@"predictions"];
                 self.cityDataArray = (NSMutableArray*)tempData;
 #ifdef DEBUG
         NSLog(@"Temp data is %@", self.cityDataArray);
@@ -149,7 +155,7 @@ static NSString *userFromUserDefaults = @"userName";
         __block LetsRollViewController *weakSelf = self;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([weakSelf.cityDataArray count] == 0) {
+            if ((weakSelf.cityDataArray).count == 0) {
                 UIAlertController *noCityAlert = [UIAlertController alertControllerWithTitle:@"No city found" message:@"Try your search again" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [weakSelf.activityIndicatorView stopAnimating];
@@ -178,7 +184,7 @@ static NSString *userFromUserDefaults = @"userName";
         return 0;
     }
     
-    return [self.cityDataArray count];
+    return (self.cityDataArray).count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -217,7 +223,7 @@ static NSString *userFromUserDefaults = @"userName";
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-        NSDictionary *dict = [self.cityDataArray objectAtIndex:indexPath.row];
+        NSDictionary *dict = (self.cityDataArray)[indexPath.row];
     self.citySelectorTextField.text = dict[@"description"];
     self.citySelectorTableView.hidden = YES;
     [self.citySelectorTextField resignFirstResponder];
@@ -229,9 +235,9 @@ static NSString *userFromUserDefaults = @"userName";
 
 - (IBAction)submitTravelInfo:(id)sender {
 
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObjectContext *context = appDelegate.managedObjectContext;
     TravelInfo *travelInfo = [NSEntityDescription
                   insertNewObjectForEntityForName:travelEntity
                   inManagedObjectContext:context];
@@ -265,7 +271,7 @@ static NSString *userFromUserDefaults = @"userName";
             NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingAllTypes error:nil];
             [detector enumerateMatchesInString:travelInfo.travelDate
                                        options:kNilOptions
-                                         range:NSMakeRange(0, [travelInfo.travelDate length])
+                                         range:NSMakeRange(0, (travelInfo.travelDate).length)
                                     usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop)
             { detectedDate = result.date; }];
             
@@ -273,7 +279,7 @@ static NSString *userFromUserDefaults = @"userName";
             localNotification.alertBody = @"Ready to leave, make sure everything is packed up";
             localNotification.alertAction = @"Let's check";
             localNotification.timeZone = [NSTimeZone defaultTimeZone];
-            localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+            localNotification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
             
             [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
             

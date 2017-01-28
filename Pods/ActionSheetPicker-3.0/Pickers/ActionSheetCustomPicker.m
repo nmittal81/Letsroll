@@ -75,10 +75,10 @@
     if ( self.initialSelections )
     {
         NSAssert(pv.numberOfComponents == self.initialSelections.count, @"Number of sections not match");
-        for (NSUInteger i = 0; i < [self.initialSelections count]; i++)
+        for (NSUInteger i = 0; i < (self.initialSelections).count; i++)
         {
 
-            NSInteger row = [(NSNumber *) self.initialSelections[i] integerValue];
+            NSInteger row = ((NSNumber *) self.initialSelections[i]).integerValue;
             NSAssert([pv numberOfRowsInComponent:i] > row, @"Number of sections not match");
             [pv selectRow:row inComponent:i animated:NO];
 
