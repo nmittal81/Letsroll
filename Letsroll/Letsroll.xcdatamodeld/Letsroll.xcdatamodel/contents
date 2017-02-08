@@ -3,20 +3,22 @@
     <entity name="PackingList" representedClassName="PackingList" syncable="YES">
         <attribute name="isPacked" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="travelerInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelerInfo" syncable="YES"/>
+        <relationship name="travelerInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelerInfo" inverseName="packingList" inverseEntity="TravelerInfo" syncable="YES"/>
     </entity>
     <entity name="TravelerInfo" representedClassName="TravelerInfo" syncable="YES">
         <attribute name="reminderDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="travelInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" syncable="YES"/>
+        <relationship name="packingList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PackingList" inverseName="travelerInfo" inverseEntity="PackingList" syncable="YES"/>
+        <relationship name="travelInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelInfo" inverseName="travelerInfo" inverseEntity="TravelInfo" syncable="YES"/>
     </entity>
     <entity name="TravelInfo" representedClassName="TravelInfo" syncable="YES">
         <attribute name="destination" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="travelDate" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="travelerInfo" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TravelerInfo" inverseName="travelInfo" inverseEntity="TravelerInfo" syncable="YES"/>
     </entity>
     <elements>
         <element name="PackingList" positionX="-513" positionY="-0" width="128" height="88"/>
-        <element name="TravelerInfo" positionX="-333" positionY="36" width="128" height="88"/>
-        <element name="TravelInfo" positionX="-99" positionY="38" width="128" height="73"/>
+        <element name="TravelerInfo" positionX="-333" positionY="36" width="128" height="103"/>
+        <element name="TravelInfo" positionX="-99" positionY="38" width="128" height="88"/>
     </elements>
 </model>
