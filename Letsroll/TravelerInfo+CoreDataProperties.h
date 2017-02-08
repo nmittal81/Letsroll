@@ -10,6 +10,7 @@
 //
 
 #import "TravelerInfo.h"
+#import "PackingList.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *user;
 @property (nullable, nonatomic, retain) NSDate *reminderDate;
 @property (nullable, nonatomic, retain) TravelInfo *travelInfo;
+@property (nullable, nonatomic, retain) PackingList *packingList;
 
 @end
 

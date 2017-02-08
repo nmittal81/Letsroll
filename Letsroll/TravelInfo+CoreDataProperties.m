@@ -15,5 +15,6 @@
 
 @dynamic destination;
 @dynamic travelDate;
+@dynamic travelerInfo;
 
 @end

@@ -10,6 +10,7 @@
 //
 
 #import "TravelInfo.h"
+#import "TravelerInfo.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSString *destination;
 @property (nullable, nonatomic, retain) NSString *travelDate;
+@property (nullable, nonatomic, retain) TravelerInfo *travelerInfo;
 
 @end
 
